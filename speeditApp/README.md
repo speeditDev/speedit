@@ -13,7 +13,7 @@
 - 혹은 iox/~~~.xcworkspace 파일을 더블클릭
 
 세팅
-- styled-component ( 원하면 사용 )
+- styled-component ( 원하면 사용, from "styled-components/native" )
 - react-navigation v6
 - reanimated v2
 - react-native-swiper
