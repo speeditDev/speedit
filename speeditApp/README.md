@@ -21,4 +21,4 @@
 예정
 - custom font 설정
 - splash
-- 
+- react-native-gesture-handler ( 필요하면 설치 및 세팅예정)
