@@ -22,3 +22,20 @@
 - custom font 설정
 - splash
 - react-native-gesture-handler ( 필요하면 설치 및 세팅예정)
+
+---- 
+
+#### 안드로이드 네이티브 모듈 만들기
+- https://reactnative.dev/docs/native-modules-android
+
+----
+#### iOS 네이티브 모듈 만들기
+- https://reactnative.dev/docs/native-modules-ios
+- https://reactnative.dev/docs/native-modules-ios#promises
+
+----
+### 참고:
+- https://developers.google.com/ml-kit/vision/text-recognition/v2  
+  (한글버전 지원은 v2(beta) 이상 )
+- https://github.com/dimaportenko/react-native-mlkit-tutorial
+----

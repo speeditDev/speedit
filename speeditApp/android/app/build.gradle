@@ -195,6 +195,11 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    // To recognize Latin script
+    implementation 'com.google.mlkit:text-recognition:16.0.0-beta2'
+    // To recognize Korean script
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta2'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
