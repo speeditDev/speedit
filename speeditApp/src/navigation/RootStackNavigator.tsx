@@ -4,6 +4,7 @@ import {RouteProp} from '@react-navigation/native';
 import SnsLoginScreen from '../screens/snsLogin/SnsLoginScreen';
 import SignUpScreen from '../screens/singUp/SignUpScreen';
 import BottomGnbStackNavigator from './BottomGnbStackNavigator';
+import OcrSampleStackNavigator from '../temp/ocr/OcrSampleStackNavigator';
 
 // root 스택에서 갈 수 있는 화면들
 // - 스플래쉬 // todo : 각 네이티브에서 할지, RN 영역에서 할지
@@ -20,6 +21,9 @@ type RootStackParam = {
   SignUpScreen: undefined;
   BottomGnbStackScreen: undefined;
   SettingStackScreen: undefined;
+
+  // ocr 테스트 임시
+  OcrSampleStackScreen: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParam>();
@@ -37,6 +41,9 @@ const RootStackNavigator = () => (
     <RootStack.Screen name={'SnsLoginScreen'} component={SnsLoginScreen} />
     <RootStack.Screen name={'SignUpScreen'} component={SignUpScreen} />
     <RootStack.Screen name={'BottomGnbStackScreen'} component={BottomGnbStackNavigator} />
+
+    {/* 임시화면, todo: remove */}
+    <RootStack.Screen name={'OcrSampleStackScreen'} component={OcrSampleStackNavigator} />
   </RootStack.Navigator>
 );
 
