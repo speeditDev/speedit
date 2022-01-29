@@ -5,6 +5,7 @@ import SnsLoginScreen from '../screens/snsLogin/SnsLoginScreen';
 import SignUpScreen from '../screens/singUp/SignUpScreen';
 import BottomGnbStackNavigator from './BottomGnbStackNavigator';
 import OcrSampleStackNavigator from '../temp/ocr/OcrSampleStackNavigator';
+import KakaoLoginSample from '../temp/kakao/KakaoLogin';
 
 // root 스택에서 갈 수 있는 화면들
 // - 스플래쉬 // todo : 각 네이티브에서 할지, RN 영역에서 할지
@@ -24,6 +25,9 @@ type RootStackParam = {
 
   // ocr 테스트 임시
   OcrSampleStackScreen: undefined;
+
+  // kakao 로그인 테스트 임시
+  KakaoLoginSample: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParam>();
@@ -36,7 +40,7 @@ export interface RootStackNavigationProps<RouteName extends keyof RootStackParam
 
 const RootStackNavigator = () => (
   <RootStack.Navigator
-    initialRouteName={'SnsLoginScreen'}
+    initialRouteName={'KakaoLoginSample'}
     screenOptions={{presentation: 'card', headerShown: false, animation: 'slide_from_right'}}>
     <RootStack.Screen name={'SnsLoginScreen'} component={SnsLoginScreen} />
     <RootStack.Screen name={'SignUpScreen'} component={SignUpScreen} />
@@ -44,6 +48,9 @@ const RootStackNavigator = () => (
 
     {/* 임시화면, todo: remove */}
     <RootStack.Screen name={'OcrSampleStackScreen'} component={OcrSampleStackNavigator} />
+
+    {/*임시화면*/}
+    <RootStack.Screen name={'KakaoLoginSample'} component={KakaoLoginSample} />
   </RootStack.Navigator>
 );
 

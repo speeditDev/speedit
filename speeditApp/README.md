@@ -39,3 +39,13 @@
   (한글버전 지원은 v2(beta) 이상 )
 - https://github.com/dimaportenko/react-native-mlkit-tutorial
 ----
+
+## 카카오 로그인 설정
+- 카카오 설정 SDK: 활성화 ON
+- 카카오 애플리케이션 만들고, 네이티브 키 활용
+- 번들 ID 설정 ( XCode 값이랑 카카오에 등록하는 값이랑 동일하게 )
+- 번들 ID : com.bside.speedit.bookplate
+- https://github.com/react-native-seoul/react-native-kakao-login
+- plist 설정
+- https://developers.kakao.com/docs/latest/ko/reference/design-guide
+- 에러났떤 부분 ( plist 에 키값없음, url scheme 콤마 제거안해서 )

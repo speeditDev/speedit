@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1C4D0AB927A535540058848F /* SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4D0AB827A535540058848F /* SwiftBridge.swift */; };
 		1CE5B37E2792D6C80082563D /* RCTTextRecognitionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5B37D2792D6C80082563D /* RCTTextRecognitionModule.m */; };
 		1FBDAF29C3F9418382FB9D5B /* Outfit-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A82ACE6299240B8B57E6A00 /* Outfit-Bold.otf */; };
 		461B04F509CE4767ABC12526 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DDDB80D63548495BA924F38D /* Pretendard-Medium.otf */; };
@@ -42,6 +43,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = speeditApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = speeditApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = speeditApp/main.m; sourceTree = "<group>"; };
+		1C4D0AB727A535530058848F /* speeditApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "speeditApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C4D0AB827A535540058848F /* SwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridge.swift; sourceTree = "<group>"; };
 		1CE5B37C2792D66E0082563D /* RCTTextRecognitionModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextRecognitionModule.h; sourceTree = "<group>"; };
 		1CE5B37D2792D6C80082563D /* RCTTextRecognitionModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextRecognitionModule.m; sourceTree = "<group>"; };
 		257386E8154C44A898C44CF7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.otf"; path = "../src/assets/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1C4D0AB827A535540058848F /* SwiftBridge.swift */,
+				1C4D0AB727A535530058848F /* speeditApp-Bridging-Header.h */,
 			);
 			name = speeditApp;
 			sourceTree = "<group>";
@@ -235,7 +240,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -390,6 +395,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				1C4D0AB927A535540058848F /* SwiftBridge.swift in Sources */,
 				1CE5B37E2792D6C80082563D /* RCTTextRecognitionModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +414,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -434,6 +441,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = speeditAppTests/Info.plist;
@@ -474,8 +482,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bside.speedit.bookplate;
 				PRODUCT_NAME = speeditApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "speeditApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -502,8 +511,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bside.speedit.bookplate;
 				PRODUCT_NAME = speeditApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "speeditApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
