@@ -22,11 +22,9 @@ const KakaoLoginSample = () => {
   const [result, setResult] = useState<string>('');
 
   const signInWithKakao = async () => {
-    console.log('11');
     const token = await login();
     console.log(JSON.stringify(token));
-    console.log('22');
-    // setResult(JSON.stringify(token));
+    setResult(JSON.stringify(token));
   };
 
   const signOutWithKakao = async (): Promise<void> => {

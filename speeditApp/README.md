@@ -40,7 +40,7 @@
 - https://github.com/dimaportenko/react-native-mlkit-tutorial
 ----
 
-## 카카오 로그인 설정
+## 카카오 로그인 설정 ( iOS )
 - 카카오 설정 SDK: 활성화 ON
 - 카카오 애플리케이션 만들고, 네이티브 키 활용
 - 번들 ID 설정 ( XCode 값이랑 카카오에 등록하는 값이랑 동일하게 )
@@ -49,3 +49,15 @@
 - plist 설정
 - https://developers.kakao.com/docs/latest/ko/reference/design-guide
 - 에러났떤 부분 ( plist 에 키값없음, url scheme 콤마 제거안해서 )
+- https://www.youtube.com/watch?v=uCn1xIijuos&list=PLMu8UG37vF6oJLNhjsjoy_ApcJFZZwJOo&index=12
+- 
+## 카카오 로그인 설정 ( Android )
+- 키 해시 등록 필요
+- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-android#add-key-hash
+- https://developers.kakao.com/docs/latest/ko/getting-started/sdk-android
+- React-Native 에서는 `android/app/debug.keystore` 의 해시를 추가해주시면 됩니다.
+--> 현재 버그가 있음 ( 막 등록해 놓음, 수정필요, 찾아야함, 개발자 모두 등록해야함, 맥, 윈도우, 디버그, 릴리즈 각각)
+```
+```
+- https://www.youtube.com/watch?v=YJaOT3ZVKNg&t=15s
+- 위에 해도 안될 시 ( 네이티브 카카오 로그인 모듈의 string 값에서 네이티브 키 값 수정하기  )
