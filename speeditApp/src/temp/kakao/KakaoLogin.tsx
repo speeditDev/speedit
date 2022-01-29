@@ -38,7 +38,6 @@ const KakaoLoginSample = () => {
     // const profile: KakaoProfile = await getKakaoProfile();
 
     const profile = await getKakaoProfile();
-
     setResult(JSON.stringify(profile));
   };
 

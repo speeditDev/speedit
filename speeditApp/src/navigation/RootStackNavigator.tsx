@@ -40,7 +40,7 @@ export interface RootStackNavigationProps<RouteName extends keyof RootStackParam
 
 const RootStackNavigator = () => (
   <RootStack.Navigator
-    initialRouteName={'KakaoLoginSample'}
+    initialRouteName={'SnsLoginScreen'}
     screenOptions={{presentation: 'card', headerShown: false, animation: 'slide_from_right'}}>
     <RootStack.Screen name={'SnsLoginScreen'} component={SnsLoginScreen} />
     <RootStack.Screen name={'SignUpScreen'} component={SignUpScreen} />
