@@ -5,6 +5,9 @@ import RegisterTabScreen from '../screens/bottomGnb/register/RegisterTabScreen';
 import AlertTabScreen from '../screens/bottomGnb/alert/AlertTabScreen';
 import SearchTabStackNavigator from './SearchTabStackNavigator';
 import MyPageTabStackNavigator from './MyPageTabStackNavigator';
+import {COLORS} from '../styles/colors';
+import {Image, View} from 'react-native';
+import {spacing} from '../styles/spacing';
 
 // 하단 5개 탭
 type BottomGnbStackParam = {
@@ -23,23 +26,53 @@ const BottomGnbStackNavigator = () => {
       initialRouteName={'HomeTabScreen'}
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#2a9d8f',
-        tabBarInactiveTintColor: '#f4a261',
-        tabBarLabelStyle: {fontSize: 14, fontWeight: '400'},
+        tabBarStyle: {backgroundColor: COLORS.trueBlack, borderTopWidth: 1, borderTopColor: COLORS.grey7},
+        tabBarActiveTintColor: COLORS.primaryWhite,
+        tabBarInactiveTintColor: COLORS.grey1,
+        tabBarIconStyle: {marginBottom: -spacing.xxs},
       }}>
-      <BottomGnbStack.Screen name={'HomeTabScreen'} component={HomeTabScreen} options={{tabBarLabel: '홈'}} />
-      <BottomGnbStack.Screen name={'RegisterTabScreen'} component={RegisterTabScreen} options={{tabBarLabel: '등록'}} />
+      <BottomGnbStack.Screen
+        name={'HomeTabScreen'}
+        component={HomeTabScreen}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => <Image source={require('../images/icon_home.png')} style={{width: 24, height: 24}} />,
+        }}
+      />
+      <BottomGnbStack.Screen
+        name={'RegisterTabScreen'}
+        component={RegisterTabScreen}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => <Image source={require('../images/icon_search.png')} style={{width: 24, height: 24}} />,
+        }}
+      />
       <BottomGnbStack.Screen
         name={'SearchTabStackScreen'}
         component={SearchTabStackNavigator}
-        options={{tabBarLabel: '검색'}}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => (
+            <Image source={require('../images/icon_create_feed.png')} style={{width: 36, height: 36}} />
+          ),
+        }}
       />
       <BottomGnbStack.Screen
         name={'MyPageTabStackScreen'}
         component={MyPageTabStackNavigator}
-        options={{tabBarLabel: '마이'}}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => <Image source={require('../images/icon_noti.png')} style={{width: 24, height: 24}} />,
+        }}
       />
-      <BottomGnbStack.Screen name={'AlertTabScreen'} component={AlertTabScreen} options={{tabBarLabel: '알림'}} />
+      <BottomGnbStack.Screen
+        name={'AlertTabScreen'}
+        component={AlertTabScreen}
+        options={{
+          tabBarLabel: () => null,
+          tabBarIcon: () => <View style={{width: 28, height: 28, borderRadius: 14, backgroundColor: COLORS.grey1}} />,
+        }}
+      />
     </BottomGnbStack.Navigator>
   );
 };

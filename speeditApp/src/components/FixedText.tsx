@@ -1,6 +1,6 @@
 import React from 'react';
 import {ColorValue, Text} from 'react-native';
-import {textColor} from '../styles/colors';
+import {COLORS} from '../styles/colors';
 import {pretendard} from '../styles/textStyled';
 
 interface FixedTextProps {
@@ -9,7 +9,7 @@ interface FixedTextProps {
 }
 
 // color 기본값을 정해놓고, 값이 있을때 덮어씌우도록 설정
-export const ContentKr: React.FC<FixedTextProps> = ({children, color = textColor['100'], numberOfLines}) => {
+export const ContentKr: React.FC<FixedTextProps> = ({children, color = COLORS['100'], numberOfLines}) => {
   return (
     <Text
       allowFontScaling={false}
@@ -21,7 +21,7 @@ export const ContentKr: React.FC<FixedTextProps> = ({children, color = textColor
   );
 };
 
-export const AlertMessageKr: React.FC<FixedTextProps> = ({children, color = textColor['100'], numberOfLines}) => {
+export const AlertMessageKr: React.FC<FixedTextProps> = ({children, color = COLORS['100'], numberOfLines}) => {
   return (
     <Text
       allowFontScaling={false}

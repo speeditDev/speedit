@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleProp, StyleSheet, Text, TextStyle, View} from 'react-native';
-import {textColor} from './colors';
+import {StyleSheet} from 'react-native';
 
 // includeFontPadding 을 false 로 하는 이유 : 안드로이드에서 달라지는 부분을 고려하기위함
 
 const LINE_HEIGHT_RATIO = 1.5;
 
+// @Deprecated : 사용하지 않음
 export const outfit = StyleSheet.create({
   extraBold32: {
     includeFontPadding: false,

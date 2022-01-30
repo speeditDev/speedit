@@ -1,15 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import {RootStackNavigationProps} from '../../navigation/RootStackNavigator';
-import {Image, TouchableOpacity, Dimensions} from 'react-native';
-import {
-  KakaoOAuthToken,
-  KakaoProfile,
-  getProfile as getKakaoProfile,
-  login,
-  logout,
-  unlink,
-} from '@react-native-seoul/kakao-login';
+import {Dimensions, Image, TouchableOpacity} from 'react-native';
+import {getProfile as getKakaoProfile, login} from '@react-native-seoul/kakao-login';
 
 const {width: screenWidth} = Dimensions.get('screen');
 const BUTTON_WIDTH_SIZE = screenWidth * 0.7;
