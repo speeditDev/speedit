@@ -3,6 +3,7 @@ package com.speedit.server.repository
 import com.speedit.server.domain.User
 import com.speedit.server.domain.enums.Sex
 import com.speedit.server.respository.UserRepository
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -32,9 +33,15 @@ class RepositoryTest {
             sex = Sex.M
         )
         val insertedUser = userRepository.save(testUser)
-        println(insertedUser)
-        println(insertedUser.updatedAt)
-        println(insertedUser.createdAt)
-//        TODO("Not yet implemented")
+
+        Assertions.assertEquals(testUser.birth, insertedUser.birth)
+        Assertions.assertEquals(testUser.thumbnail, insertedUser.thumbnail)
+        Assertions.assertEquals(testUser.nickName, insertedUser.nickName)
+        Assertions.assertEquals(testUser.state, insertedUser.state)
+        Assertions.assertEquals(testUser.sex, insertedUser.sex)
+        Assertions.assertEquals(testUser.companyEmail, insertedUser.companyEmail)
+        Assertions.assertNotNull(insertedUser.createdAt)
+        Assertions.assertNotNull(insertedUser.updatedAt)
+        Assertions.assertNull(insertedUser.deletedAt)
     }
 }
