@@ -200,6 +200,9 @@ dependencies {
     // To recognize Korean script
     implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta2'
 
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation "androidx.browser:browser:1.2.0"
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }
