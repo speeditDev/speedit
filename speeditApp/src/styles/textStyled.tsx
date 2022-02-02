@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleProp, StyleSheet, Text, TextStyle, View} from 'react-native';
-import {textColor} from './colors';
+import {StyleSheet} from 'react-native';
 
 // includeFontPadding 을 false 로 하는 이유 : 안드로이드에서 달라지는 부분을 고려하기위함
 
 const LINE_HEIGHT_RATIO = 1.5;
 
+// @Deprecated : 사용하지 않음
 export const outfit = StyleSheet.create({
   extraBold32: {
     includeFontPadding: false,
@@ -108,6 +108,13 @@ export const pretendard = StyleSheet.create({
     letterSpacing: -0.2,
     fontFamily: 'Pretendard-ExtraBold',
   },
+  bold22: {
+    includeFontPadding: false,
+    fontSize: 22,
+    lineHeight: 22 * LINE_HEIGHT_RATIO,
+    letterSpacing: -0.2,
+    fontFamily: 'Pretendard-Bold',
+  },
   bold20: {
     includeFontPadding: false,
     fontSize: 20,
@@ -122,12 +129,19 @@ export const pretendard = StyleSheet.create({
     letterSpacing: -0.2,
     fontFamily: 'Pretendard-Bold',
   },
+  bold16: {
+    includeFontPadding: false,
+    fontSize: 16,
+    lineHeight: 16 * LINE_HEIGHT_RATIO,
+    letterSpacing: -0.2,
+    fontFamily: 'Pretendard-Bold',
+  },
   bold15: {
     includeFontPadding: false,
     fontSize: 15,
     lineHeight: 15 * LINE_HEIGHT_RATIO,
     letterSpacing: -0.2,
-    fontFamily: 'Pretendard-Medium',
+    fontFamily: 'Pretendard-Bold',
   },
   bold14: {
     includeFontPadding: false,

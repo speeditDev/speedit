@@ -1,13 +1,6 @@
-import {
-  KakaoOAuthToken,
-  KakaoProfile,
-  getProfile as getKakaoProfile,
-  login,
-  logout,
-  unlink,
-} from '@react-native-seoul/kakao-login';
+import {getProfile as getKakaoProfile, login, logout, unlink} from '@react-native-seoul/kakao-login';
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
 
 const ButtonWrapper = styled.View`

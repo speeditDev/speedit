@@ -1,16 +1,17 @@
 // #E8E8E8 = rgb(232,232,232)
 
-export const textColor = {
-  100: 'rgba(232,232,232,1)',
-  80: 'rgba(232,232,232,0.8 )',
-  50: 'rgba(232,232,232,0.5)',
-  30: 'rgba(232,232,232,0.3)',
-  20: 'rgba(232,232,232,0.2)',
-  5: 'rgba(232,232,232,0.05)',
-  primaryRed: '#F86565',
-  primaryGreen: '#5FD997',
-};
-
-export const bgColor = {
-  primaryBlack: '#1C1C1E',
+export const COLORS = {
+  primaryWhite: '#F9F9F9', // rgb(249,249,249)
+  whiteSentence: '#E8E8E8', // rgb(232,232,232)
+  grey1: '#BFBFC0', // rgb(201,201,204)
+  grey2: '#9F9FA5', // rgb(159,159,165)
+  grey3: '#83838A', // rgb(131,131,138)
+  grey4: '#595960', // rgb(89,89,96)
+  grey5: '#434349', // rgb(67,67,73)
+  grey6: '#333338', // rgb(51,51,56)
+  grey7: '#262629', // rgb(38,38,41)
+  black: '#1C1C1E', // rgb(28,28,30)
+  trueBlack: '#131315', // rgb(19,19,21)
+  primaryRed: '#F86565', // rgb(248,101,101)
+  primaryGreen: '#5FD997', // rgb(95,217,151)
 };

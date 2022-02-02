@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components/native';
 import {RootStackNavigationProps} from '../../navigation/RootStackNavigator';
-import {Image, TouchableOpacity, Dimensions} from 'react-native';
+import {Dimensions, Image, TouchableOpacity} from 'react-native';
 import {
   KakaoOAuthToken,
   KakaoProfile,
@@ -16,6 +16,7 @@ import {
   NativeModuleError,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+
 
 const {width: screenWidth} = Dimensions.get('screen');
 const BUTTON_WIDTH_SIZE = screenWidth * 0.7;
