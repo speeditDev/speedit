@@ -10,6 +10,12 @@ import {
   logout,
   unlink,
 } from '@react-native-seoul/kakao-login';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  NativeModuleError,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const {width: screenWidth} = Dimensions.get('screen');
 const BUTTON_WIDTH_SIZE = screenWidth * 0.7;
@@ -48,6 +54,20 @@ const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>
     navigation.navigate('SignUpScreen');
   };
 
+  const onGoogleLogin = async () => {
+    GoogleSignin.configure({
+      offlineAccess: false,
+    });
+
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    if (isSignedIn) {
+      await GoogleSignin.revokeAccess();
+    }
+    const info = await GoogleSignin.signIn();
+    console.log(JSON.stringify(info));
+    navigation.navigate('SignUpScreen');
+  };
+
   return (
     <View>
       <Text>간편로그인</Text>
@@ -65,6 +85,15 @@ const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>
         }}>
         <Image source={require('../../images/kakao_login_medium_wide.png')} width={300} height={45} />
       </TouchableOpacity>
+
+      <GoogleSigninButton
+        onPress={() => onGoogleLogin()}
+        size={GoogleSigninButton.Size.Standard}
+        color={GoogleSigninButton.Color.Dark}
+        style={{
+          marginTop: 10,
+        }}
+      />
 
       <Button onPress={() => navigation.navigate('OcrSampleStackScreen')}>
         <Text>Ocr 임시 테스트</Text>
