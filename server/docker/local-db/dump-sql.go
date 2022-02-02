@@ -50,7 +50,7 @@ func main() {
 	user := flag.String("user", "root", "db user name")
 	password := flag.String("password", "adfaie83ma", "db password")
 	databaseName := flag.String("database", "book-plate", "database name")
-	containerName := flag.String("container", "docker_mysql-db_1", "docker container name")
+	containerName := flag.String("container", "speedit-local-db", "docker container name")
 
 	execDockerMysqlSqlDump(*containerName, *user, *password, *databaseName)
 }

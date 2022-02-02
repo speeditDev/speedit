@@ -7,7 +7,8 @@ services:
       - "6379:6379"
     restart: always
   mysql-db:
-    image: mysql:5.7
+    container_name: speedit-local-db
+    image: mysql:8.0
     ports:
       - "3307:3306"
     restart: always

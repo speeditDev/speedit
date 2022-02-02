@@ -1,36 +1,43 @@
 package com.speedit.server.config
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
+import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
+import java.util.*
+import javax.persistence.EntityManagerFactory
 import javax.sql.DataSource
 
 @Configuration
 @EnableJpaRepositories
 @EnableTransactionManagement
-class DataBaseSourceConfig (@Value("\${DATABASE_HOST}") val host:String,
-                            @Value("\${DATABASE_USER}") val userName: String,
-                            @Value("\${DATABASE_PASSWORD}") val password: String,
-                            @Value("\${DATABASE_NAME}") val dbName: String) {
+class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
+                        @Value("\${spring.datasource.username}") val userName: String,
+                        @Value("\${spring.datasource.password}") val password: String,
+                        @Value("\${spring.datasource.driver-class-name}") val driverClassName: String) {
+
     @Bean
     fun datasource(): DataSource {
         return DataSourceBuilder.create()
-            .url(this.getUrl())
-            .username(this.userName)
-            .password(this.password)
-            .driverClassName("com.mysql.cj.jdbc.Driver")
+            .url(host)
+            .username(userName)
+            .password(password)
+            .driverClassName(driverClassName)
             .build()
     }
 
     @Bean
     fun entityManagerFactory(): LocalContainerEntityManagerFactoryBean {
         val vendorAdapter = HibernateJpaVendorAdapter()
-        vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setShowSql(true);
 
         val factory = LocalContainerEntityManagerFactoryBean();
         factory.jpaVendorAdapter = vendorAdapter;
@@ -39,7 +46,10 @@ class DataBaseSourceConfig (@Value("\${DATABASE_HOST}") val host:String,
         return factory;
     }
 
-    private fun getUrl(): String {
-        return "jdbc:mysql://${this.host}/${this.dbName}?serverTimezone=UTC&characterEncoding=UTF-8"
+    @Bean
+    fun transactionManager(entityManagerFactory: EntityManagerFactory): PlatformTransactionManager {
+        val trxManager = JpaTransactionManager()
+        trxManager.entityManagerFactory = entityManagerFactory
+        return trxManager;
     }
 }

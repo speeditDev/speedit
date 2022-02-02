@@ -1,3 +1,9 @@
+# Environment Variable
+DATABASE_HOST: localhost:3307
+DATABASE_USER: root
+DATABASE_PASSWORD: adfaie83ma
+DATABASE_NAME: book-plate
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
