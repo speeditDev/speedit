@@ -1,10 +1,10 @@
-package com.speedit.api
+package com.speedit.server
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class SpeeditApplicationTests {
+class ServerApplicationTests {
 
     @Test
     fun contextLoads() {

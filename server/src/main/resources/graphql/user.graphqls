@@ -1,4 +1,4 @@
-type Member {
+type User {
     idx: Int,
     nickName: String,
     allowedUseTerm: Boolean,
@@ -9,5 +9,5 @@ type Member {
 
 
 type Query {
-    getMember(idx: Int!) : Member!
+    getUser(idx: Int!) : User!
 }
