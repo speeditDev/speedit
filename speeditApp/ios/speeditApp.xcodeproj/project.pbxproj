@@ -11,9 +11,16 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1C4D0AB927A535540058848F /* SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4D0AB827A535540058848F /* SwiftBridge.swift */; };
 		1CE5B37E2792D6C80082563D /* RCTTextRecognitionModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE5B37D2792D6C80082563D /* RCTTextRecognitionModule.m */; };
+		1FBDAF29C3F9418382FB9D5B /* Outfit-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A82ACE6299240B8B57E6A00 /* Outfit-Bold.otf */; };
+		461B04F509CE4767ABC12526 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DDDB80D63548495BA924F38D /* Pretendard-Medium.otf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-speeditApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-speeditApp.a */; };
+		63DE2C24C45A4463AE385D93 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39AB24B29EE34EE2944BAF86 /* Pretendard-Bold.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		828E4EBE8E404235AD5D7950 /* Outfit-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 716857762260424781A0A84F /* Outfit-ExtraBold.otf */; };
+		86249D056A354D8580E388E3 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 257386E8154C44A898C44CF7 /* Pretendard-ExtraBold.otf */; };
+		8CFF56BD57384A06BE1143E9 /* Outfit-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6862CC4501F467C94574E7F /* Outfit-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +43,20 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = speeditApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = speeditApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = speeditApp/main.m; sourceTree = "<group>"; };
+		1C4D0AB727A535530058848F /* speeditApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "speeditApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		1C4D0AB827A535540058848F /* SwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBridge.swift; sourceTree = "<group>"; };
 		1CE5B37C2792D66E0082563D /* RCTTextRecognitionModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTextRecognitionModule.h; sourceTree = "<group>"; };
 		1CE5B37D2792D6C80082563D /* RCTTextRecognitionModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTextRecognitionModule.m; sourceTree = "<group>"; };
+		257386E8154C44A898C44CF7 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.otf"; path = "../src/assets/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		2A82ACE6299240B8B57E6A00 /* Outfit-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Outfit-Bold.otf"; path = "../src/assets/fonts/Outfit-Bold.otf"; sourceTree = "<group>"; };
+		39AB24B29EE34EE2944BAF86 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.otf"; path = "../src/assets/fonts/Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-speeditApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-speeditApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		716857762260424781A0A84F /* Outfit-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Outfit-ExtraBold.otf"; path = "../src/assets/fonts/Outfit-ExtraBold.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = speeditApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B6862CC4501F467C94574E7F /* Outfit-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Outfit-Medium.otf"; path = "../src/assets/fonts/Outfit-Medium.otf"; sourceTree = "<group>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-speeditApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-speeditApp.debug.xcconfig"; path = "Target Support Files/Pods-speeditApp/Pods-speeditApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-speeditApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-speeditApp.release.xcconfig"; path = "Target Support Files/Pods-speeditApp/Pods-speeditApp.release.xcconfig"; sourceTree = "<group>"; };
+		DDDB80D63548495BA924F38D /* Pretendard-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.otf"; path = "../src/assets/fonts/Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -91,6 +106,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				1C4D0AB827A535540058848F /* SwiftBridge.swift */,
+				1C4D0AB727A535530058848F /* speeditApp-Bridging-Header.h */,
 			);
 			name = speeditApp;
 			sourceTree = "<group>";
@@ -129,6 +146,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				B73AD5D4F0E1498283B103A7 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -142,6 +160,19 @@
 				00E356EE1AD99517003FC87E /* speeditAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B73AD5D4F0E1498283B103A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2A82ACE6299240B8B57E6A00 /* Outfit-Bold.otf */,
+				716857762260424781A0A84F /* Outfit-ExtraBold.otf */,
+				B6862CC4501F467C94574E7F /* Outfit-Medium.otf */,
+				39AB24B29EE34EE2944BAF86 /* Pretendard-Bold.otf */,
+				257386E8154C44A898C44CF7 /* Pretendard-ExtraBold.otf */,
+				DDDB80D63548495BA924F38D /* Pretendard-Medium.otf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
@@ -209,7 +240,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -246,6 +277,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				1FBDAF29C3F9418382FB9D5B /* Outfit-Bold.otf in Resources */,
+				828E4EBE8E404235AD5D7950 /* Outfit-ExtraBold.otf in Resources */,
+				8CFF56BD57384A06BE1143E9 /* Outfit-Medium.otf in Resources */,
+				63DE2C24C45A4463AE385D93 /* Pretendard-Bold.otf in Resources */,
+				86249D056A354D8580E388E3 /* Pretendard-ExtraBold.otf in Resources */,
+				461B04F509CE4767ABC12526 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +395,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				1C4D0AB927A535540058848F /* SwiftBridge.swift in Sources */,
 				1CE5B37E2792D6C80082563D /* RCTTextRecognitionModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +414,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -402,6 +441,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = speeditAppTests/Info.plist;
@@ -442,8 +482,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bside.speedit.bookplate;
 				PRODUCT_NAME = speeditApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "speeditApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -470,8 +511,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bside.speedit.bookplate;
 				PRODUCT_NAME = speeditApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "speeditApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -527,7 +569,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -586,7 +628,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
