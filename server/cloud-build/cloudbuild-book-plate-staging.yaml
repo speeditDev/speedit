@@ -1,0 +1,36 @@
+#
+# Copyright 2021 lemonade
+#
+
+steps:
+# Build the container image
+- name: gcr.io/cloud-builders/docker
+  args: ['build',
+    '-t', 'gcr.io/book-plate/book-plate-backend-staging',
+    '-f', '../docker/book-plate/staging/Dockerfile',
+    '../.'
+  ]
+
+# Check either book-plate can start or not
+- name: gcr.io/cloud-builders/docker
+  args: ['run',
+    '--rm',
+    '--env', 'SERVICE_ENVIRONMENT=build',
+    'gcr.io/book-plate/book-plate-backend-staging',
+  ]
+
+# Push the container image to Container Registry
+- name: gcr.io/cloud-builders/docker
+  args: ['push', 'gcr.io/book-plate/book-plate-backend-staging']
+
+# Deploy book-plate backend application image to Cloud Run
+- name: gcr.io/cloud-builders/gcloud
+  args: [
+    'beta','run', 'deploy', 'book-plate-backend-staging',
+    '--image=gcr.io/book-plate/book-plate-backend-staging',
+    '--region=asia-northeast3',
+    '--platform=managed',
+    '--allow-unauthenticated',
+    '--min-instances=1',
+    '--memory=1024M',
+  ]
