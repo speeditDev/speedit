@@ -6,6 +6,10 @@ import SignUpScreen from '../screens/singUp/SignUpScreen';
 import BottomGnbStackNavigator from './BottomGnbStackNavigator';
 import OcrSampleStackNavigator from '../temp/ocr/OcrSampleStackNavigator';
 import KakaoLoginSample from '../temp/kakao/KakaoLogin';
+import BookDetailScreen from '../screens/bottomGnb/search/BookDetailScreen';
+import {Platform} from 'react-native';
+import {TempBookInfoProps} from '../types/typed';
+import SplashScreen from '../screens/intro/SplashScreen';
 
 // root 스택에서 갈 수 있는 화면들
 // - 스플래쉬 // todo : 각 네이티브에서 할지, RN 영역에서 할지
@@ -18,10 +22,15 @@ import KakaoLoginSample from '../temp/kakao/KakaoLogin';
 // 네이밍은 추가하고 싶은 화면이 단일 화면이면 ~~Screen,
 // 네이밍은 추가하고 싶은 화면이 스택으로 쌓여있는 화면이면 ~~StackScreen,
 type RootStackParam = {
+  SplashScreen: undefined;
+
   SnsLoginScreen: undefined;
   SignUpScreen: undefined;
   BottomGnbStackScreen: undefined;
   SettingStackScreen: undefined;
+
+  // 도서상세 정보 ( 탭보다 위에 나와야해서 Root 에 선언 )
+  BookDetailScreen: {bookDetail: TempBookInfoProps};
 
   // ocr 테스트 임시
   OcrSampleStackScreen: undefined;
@@ -38,13 +47,32 @@ export interface RootStackNavigationProps<RouteName extends keyof RootStackParam
   route: RouteProp<RootStackParam, RouteName>;
 }
 
+export type RootStackNavigationType = NativeStackNavigationProp<RootStackParam>;
+
 const RootStackNavigator = () => (
   <RootStack.Navigator
-    initialRouteName={'SnsLoginScreen'}
+    initialRouteName={'SplashScreen'}
     screenOptions={{presentation: 'card', headerShown: false, animation: 'slide_from_right'}}>
-    <RootStack.Screen name={'SnsLoginScreen'} component={SnsLoginScreen} />
+    <RootStack.Screen name={'SplashScreen'} component={SplashScreen} />
+
+    <RootStack.Group screenOptions={{presentation: 'card', headerShown: false, animation: 'fade'}}>
+      <RootStack.Screen name={'SnsLoginScreen'} component={SnsLoginScreen} />
+    </RootStack.Group>
+
     <RootStack.Screen name={'SignUpScreen'} component={SignUpScreen} />
-    <RootStack.Screen name={'BottomGnbStackScreen'} component={BottomGnbStackNavigator} />
+
+    <RootStack.Group screenOptions={{presentation: 'card', headerShown: false, animation: 'fade'}}>
+      <RootStack.Screen name={'BottomGnbStackScreen'} component={BottomGnbStackNavigator} />
+    </RootStack.Group>
+
+    <RootStack.Group
+      screenOptions={{
+        headerShown: false,
+        presentation: 'modal',
+        animation: Platform.OS === 'android' ? 'fade_from_bottom' : 'default',
+      }}>
+      <RootStack.Screen name={'BookDetailScreen'} component={BookDetailScreen} />
+    </RootStack.Group>
 
     {/* 임시화면, todo: remove */}
     <RootStack.Screen name={'OcrSampleStackScreen'} component={OcrSampleStackNavigator} />
