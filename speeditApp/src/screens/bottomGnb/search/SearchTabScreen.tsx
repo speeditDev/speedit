@@ -1,57 +1,125 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import styled from 'styled-components/native';
 import {SearchTabStackNavigationProps} from '../../../navigation/SearchTabStackNavigator';
-import {TextInput} from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  StatusBar,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import {COLORS} from '../../../styles/colors';
+import {spacing} from '../../../styles/spacing';
+import {Button} from '../../../components/Button';
+import {pretendard} from '../../../styles/textStyled';
+import Icons from '../../../components/Icons';
 
-const View = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+    paddingVertical: spacing.l,
+    paddingLeft: spacing.m,
+    paddingRight: spacing.l,
+  },
+});
 
-const Text = styled.Text`
-  font-size: 16px;
-  color: ${props => props.theme.textColor.main};
-`;
+const Container: React.FC = ({children}) => (
+  <View style={styles.container}>
+    <StatusBar barStyle={'light-content'} backgroundColor={COLORS.black} />
+    {children}
+  </View>
+);
 
-const Button = styled.TouchableOpacity`
-  width: 50%;
-  padding-vertical: 10px;
-  align-items: center;
-  background-color: #f4a261;
-  border-radius: 6px;
-`;
+const BOOK_CATEGORY: string[] = [
+  '고전/문학',
+  '심리',
+  '철학',
+  '경영',
+  '경제',
+  '트렌드/미래예측',
+  '마케팅전략',
+  '재테크/투자',
+  '성공/처세',
+  '시간관리',
+  '자기능력계발',
+  '인간관계',
+  '대화/협상',
+  '시/에세이',
+  '역사/문화',
+];
 
-const SearchTabScreen = ({navigation}: SearchTabStackNavigationProps<'SearchTabScreen'>) => {
-  const temp =
-    '안녕하세요 반원형입니다. 오늘 하루 즐거우셨네요. 동대문과산 백두산이 마르고 닳도록 하나님이 보우하사 우리나라 만세';
-  const [input, setInput] = useState<string>('');
+const SearchTabScreen = ({navigation: {navigate}}: SearchTabStackNavigationProps<'SearchTabScreen'>) => {
+  const [inputSearch, setInputSearch] = useState<string>('');
 
-  useEffect(() => {
-    // setInput(temp);
-  }, [temp]);
+  const handleSubmit = () => {
+    if (inputSearch.length < 1) {
+      Alert.alert('검색어를 입력해주세요');
+      return;
+    }
+
+    navigate('SearchDetailScreen', {search: inputSearch});
+  };
+
+  useEffect(() => {}, []);
+
+  const handleErase = () => setInputSearch('');
 
   return (
-    <View>
-      <Text>검색</Text>
-      <Button onPress={() => navigation.navigate('SearchDetailScreen')}>
-        <Text>도서 상세 정보</Text>
-      </Button>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingBottom: spacing.s,
+              paddingRight: spacing.xs,
+              marginBottom: spacing.blank_s,
+              borderBottomWidth: 1.5,
+              borderColor: COLORS.primaryWhite,
+            }}>
+            <Icons iconName={'search'} />
+            <View style={{flex: 1, paddingHorizontal: spacing.xs}}>
+              <TextInput
+                multiline={false}
+                numberOfLines={1}
+                maxLength={30}
+                placeholder={'책 제목, 또는 작가명으로 검색'}
+                placeholderTextColor={COLORS.grey4}
+                style={[pretendard.bold18, {color: COLORS.primaryWhite, textAlignVertical: 'bottom'}]}
+                returnKeyType={'search'}
+                onChangeText={text => setInputSearch(text)}
+                value={inputSearch}
+                onSubmitEditing={handleSubmit}
+              />
+            </View>
+            {inputSearch.length > 0 ? (
+              <TouchableOpacity
+                style={{width: 24, height: 24, alignItems: 'center', justifyContent: 'center'}}
+                onPress={handleErase}>
+                <Icons iconName={'erase'} />
+              </TouchableOpacity>
+            ) : null}
+          </View>
 
-      <TextInput
-        multiline={true}
-        style={{
-          fontSize: 32,
-          borderWidth: 1,
-          borderColor: 'red',
-          color: 'black',
-          flexShrink: 1,
-        }}
-        onChangeText={text => setInput(text)}>
-        {input}
-      </TextInput>
-    </View>
+          <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap'}}>
+            {BOOK_CATEGORY.map((item, index) => (
+              <View key={`category_${index}`} style={{marginRight: spacing.xs, marginBottom: spacing.s}}>
+                <Button.Medium
+                  selected={false}
+                  buttonTitle={item}
+                  onPress={() => navigate('SearchDetailScreen', {search: item})}
+                />
+              </View>
+            ))}
+          </View>
+        </>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

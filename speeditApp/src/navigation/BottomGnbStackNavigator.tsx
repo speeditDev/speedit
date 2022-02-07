@@ -40,16 +40,16 @@ const BottomGnbStackNavigator = () => {
         }}
       />
       <BottomGnbStack.Screen
-        name={'RegisterTabScreen'}
-        component={RegisterTabScreen}
+        name={'SearchTabStackScreen'}
+        component={SearchTabStackNavigator}
         options={{
           tabBarLabel: () => null,
           tabBarIcon: () => <Image source={require('../images/icon_search.png')} style={{width: 24, height: 24}} />,
         }}
       />
       <BottomGnbStack.Screen
-        name={'SearchTabStackScreen'}
-        component={SearchTabStackNavigator}
+        name={'RegisterTabScreen'}
+        component={RegisterTabScreen}
         options={{
           tabBarLabel: () => null,
           tabBarIcon: () => (
