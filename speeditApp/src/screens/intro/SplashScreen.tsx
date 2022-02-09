@@ -35,7 +35,7 @@ const SplashScreen = ({navigation}: RootStackNavigationProps<'SplashScreen'>) =>
   const checkToken = () => {
     // todo : 토큰 체크, 토큰 갱신 ?
     // todo : 자동 로그인
-    const isValidToken = true;
+    const isValidToken = false;
     if (isValidToken) {
       goHome();
     } else {
