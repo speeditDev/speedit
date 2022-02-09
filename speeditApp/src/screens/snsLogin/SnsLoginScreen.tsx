@@ -1,7 +1,20 @@
 import * as React from 'react';
-import styled from 'styled-components/native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  Platform,
+} from 'react-native';
+import {COLORS} from '../../styles/colors';
+import {pretendard} from '../../styles/textStyled';
 import {RootStackNavigationProps} from '../../navigation/RootStackNavigator';
-import {Dimensions, Image, TouchableOpacity} from 'react-native';
+import {spacing} from '../../styles/spacing';
+
 import {
   KakaoOAuthToken,
   KakaoProfile,
@@ -17,36 +30,36 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 
+const {width} = Dimensions.get('window');
+const LOGO_SIZE = width * 0.65;
 
-const {width: screenWidth} = Dimensions.get('screen');
-const BUTTON_WIDTH_SIZE = screenWidth * 0.7;
+const logoResource = require('../../images/logo_vertical.png');
 
-// 카카오 디자인 가이드 정보
-// https://developers.kakao.com/docs/latest/ko/reference/design-guide
-const KAKAO_COLOR = '#FEE500';
-const KAKAO_RADIUS = 12;
+const TITLE_COMMENT = '문장 한 스푼으로 \n마음 양식 채우기, \n책그릇\n';
+const GUIDE_COMMENT = 'sns로 간편하게 시작하기';
 
-const View = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.black,
+    paddingVertical: spacing.l,
+    paddingLeft: spacing.m,
+    paddingRight: spacing.l,
+  },
+});
 
-const Text = styled.Text`
-  font-size: 16px;
-  color: ${props => props.theme.textColor.main};
-`;
-
-const Button = styled.TouchableOpacity`
-  width: 50%;
-  margin-vertical: 10px;
-  padding-vertical: 10px;
-  align-items: center;
-  background-color: #f4a261;
-  border-radius: 6px;
-`;
+const Container: React.FC = ({children}) => (
+  <View style={styles.container}>
+    <SafeAreaView style={{flex: 1}}>
+      <StatusBar barStyle={'light-content'} backgroundColor={COLORS.black} />
+      {children}
+    </SafeAreaView>
+  </View>
+);
 
 const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>) => {
+  const isIOS = Platform.OS === 'ios' ? true : false;
+
   const onKakaoLogin = async () => {
     const kakaoToken = await login();
     const info = await getKakaoProfile();
@@ -70,36 +83,67 @@ const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>
   };
 
   return (
-    <View>
-      <Text>간편로그인</Text>
-      <Button onPress={() => navigation.navigate('SignUpScreen')}>
-        <Text>로그인하기</Text>
-      </Button>
-
-      <TouchableOpacity
-        onPress={() => onKakaoLogin()}
-        style={{
-          alignItems: 'center',
-          width: BUTTON_WIDTH_SIZE,
-          backgroundColor: KAKAO_COLOR,
-          borderRadius: KAKAO_RADIUS,
-        }}>
-        <Image source={require('../../images/kakao_login_medium_wide.png')} width={300} height={45} />
-      </TouchableOpacity>
-
-      <GoogleSigninButton
-        onPress={() => onGoogleLogin()}
-        size={GoogleSigninButton.Size.Standard}
-        color={GoogleSigninButton.Color.Dark}
-        style={{
-          marginTop: 10,
-        }}
-      />
-
-      <Button onPress={() => navigation.navigate('OcrSampleStackScreen')}>
-        <Text>Ocr 임시 테스트</Text>
-      </Button>
-    </View>
+    <Container>
+      <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+        <View
+          style={{
+            flex: 1.5,
+            justifyContent: 'flex-end',
+            alignSelf: 'flex-start',
+            paddingBottom: 15,
+          }}>
+          <Text style={[pretendard.extraBold28, {color: COLORS.whiteSentence}]}>{TITLE_COMMENT}</Text>
+        </View>
+        <View style={{flex: 1.8}}>
+          <Image source={logoResource} style={{width: LOGO_SIZE, height: LOGO_SIZE}} resizeMode={'contain'} />
+        </View>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', paddingBottom: 20}}>
+          <Text style={[pretendard.medium14, {color: COLORS.grey3}]}>{GUIDE_COMMENT}</Text>
+        </View>
+        <View style={{flex: 0.8, flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{paddingRight: 10}}>
+            <TouchableOpacity onPress={() => onKakaoLogin()} style={{width: 52, height: 52, borderRadius: 26}}>
+              <Image source={require('../../images/login_icon_kakao.png')} width={52} height={52} />
+            </TouchableOpacity>
+          </View>
+          <View style={{paddingRight: 10}}>
+            <TouchableOpacity onPress={() => {}} style={{width: 52, height: 52, borderRadius: 26}}>
+              <Image source={require('../../images/login_icon_naver.png')} width={52} height={52} />
+            </TouchableOpacity>
+          </View>
+          <View style={{paddingRight: 10}}>
+            <TouchableOpacity onPress={() => onGoogleLogin()} style={{width: 52, height: 52, borderRadius: 26}}>
+              <Image source={require('../../images/login_icon_goolge.png')} width={52} height={52} />
+            </TouchableOpacity>
+          </View>
+          {isIOS && (
+            <View>
+              <TouchableOpacity onPress={() => {}} style={{width: 52, height: 52, borderRadius: 26}}>
+                <Image source={require('../../images/login_icon_apple.png')} width={52} height={52} />
+              </TouchableOpacity>
+            </View>
+          )}
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.reset({index: 0, routes: [{name: 'BottomGnbStackScreen'}]});
+              }}
+              style={{width: 52, height: 52, borderRadius: 10, backgroundColor: COLORS.primaryWhite}}>
+              <Text style={[pretendard.bold18, {alignItems: 'center'}]}>Home{'\n'}이동</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.reset({index: 0, routes: [{name: 'OcrSampleStackScreen'}]});
+              }}
+              style={{width: 52, height: 52, borderRadius: 10, backgroundColor: COLORS.primaryWhite}}>
+              <Text style={[pretendard.bold18, {alignItems: 'center'}]}>OCR{'\n'}테스트</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Container>
   );
 };
 
