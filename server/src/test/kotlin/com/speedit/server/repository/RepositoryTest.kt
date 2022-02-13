@@ -30,7 +30,10 @@ class RepositoryTest {
             state = 1,
             companyEmail = "testEmail",
             isCompanyEmailValid = false,
-            sex = Sex.M
+            sex = Sex.M,
+            email = "test@email.com",
+            companyName = "",
+            deletedAt = null
         )
         val insertedUser = userRepository.save(testUser)
 

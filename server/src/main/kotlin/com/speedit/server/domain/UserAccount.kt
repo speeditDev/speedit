@@ -1,6 +1,6 @@
 package com.speedit.server.domain
 
-import com.speedit.server.domain.enums.AccountType
+import com.speedit.server.domain.enums.SocialAccountType
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -13,7 +13,7 @@ data class UserAccount(
 
     @Enumerated(value = EnumType.STRING)
     @Column(columnDefinition = "ENUM('KAKAO','GOOGLE','NAVER','APPLE')", nullable = true)
-    var accountType: AccountType?,
+    var socialAccountType: SocialAccountType?,
 
     @Column(length = 100, nullable = false)
     val email: String,

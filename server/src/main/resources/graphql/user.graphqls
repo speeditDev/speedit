@@ -1,12 +1,20 @@
-type User {
-    idx: Int,
-    nickName: String,
-    allowedUseTerm: Boolean,
-    allowedPrivacyTerm: Boolean,
-    createdAt: String,
-    updatedAt: String
-}
+scalar LocalDateTime
+scalar Long
 
+type User {
+    userId: Long
+    nickName: String
+    sex: String,
+    thumbnail: String,
+    companyEmail: String
+    isCompanyEmailValid: Boolean,
+    allowedPrivacyTerm: Boolean,
+    allowedUsedTerm: String
+    state: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
+    deletedAt: LocalDateTime
+}
 
 type Query {
     getUser(idx: Int!) : User!

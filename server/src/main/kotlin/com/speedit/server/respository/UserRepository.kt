@@ -6,4 +6,11 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserRepository: JpaRepository<User, Long> {
+    override fun <S : User?> save(entity: S): S {
+        TODO("Not yet implemented")
+    }
+
+    fun existsByEmail(email: String): Boolean
+
+    fun existsByNickName(nickName: String): Boolean
 }

@@ -10,42 +10,48 @@ import javax.persistence.*
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
     var userId: Long?,
 
     @Column(length = 50, nullable = false)
-    val nickName: String,
+    var nickName: String,
 
-    val thumbnail: String?,
+    var thumbnail: String?,
 
     @Column(nullable = false)
-    val birth: LocalDate,
+    var birth: LocalDate,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('M', 'F')")
-    val sex: Sex,
-
-    @Column(nullable = false)
-    val allowedUsedTerm: Boolean,
-
-    @Column(nullable = false)
-    val allowedPrivacyTerm: Boolean,
+    @Column(nullable = false, columnDefinition = "ENUM('M', 'F') DEFAULT 'M'")
+    var sex: Sex,
 
     @Column(length = 100, nullable = false)
-    val companyEmail: String,
+    var email: String,
 
-    @Column(nullable = false)
-    val isCompanyEmailValid: Boolean,
+    @Column(length = 100)
+    var companyName: String?,
 
-    @Column(columnDefinition= "bit DEFAULT 1", nullable = false)
-    val state: Int,
+    @Column(length = 100)
+    var companyEmail: String?,
+
+    @Column(columnDefinition= "TINYINT", length = 1, nullable = false)
+    var allowedUsedTerm: Boolean,
+
+    @Column(columnDefinition= "TINYINT", length = 1, nullable = false)
+    var allowedPrivacyTerm: Boolean,
+
+    @Column(columnDefinition= "TINYINT", length = 1, nullable = false)
+    var isCompanyEmailValid: Boolean,
+
+    @Column(columnDefinition= "TINYINT", length = 1, nullable = false)
+    var state: Int,
 
     @Column(nullable = true)
     var deletedAt: LocalDateTime? = null
 ): BaseEntity() {
     override fun toString(): String {
         return "User(userId=$userId, nickName='$nickName', thumbnail=$thumbnail, birth=$birth, sex=$sex, \n" +
-                " allowedUsedTerm=$allowedUsedTerm, allowedPrivacyTerm=$allowedPrivacyTerm, companyEmail='$companyEmail', isCompanyEmailValid=$isCompanyEmailValid, \n" +
+                " allowedUsedTerm=$allowedUsedTerm, allowedPrivacyTerm=$allowedPrivacyTerm," +
+                " email='$email' companyEmail='$companyEmail', isCompanyEmailValid=$isCompanyEmailValid, \n" +
                 " state=$state, createdAt= $createdAt, updatedAt= $updatedAt deletedAt=$deletedAt)"
     }
 }
