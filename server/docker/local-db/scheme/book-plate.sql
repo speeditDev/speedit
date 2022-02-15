@@ -24,6 +24,29 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `book-plate` /*!40100 DEFAULT CHARACTER
 USE `book-plate`;
 
 --
+-- Table structure for table `Book`
+--
+
+DROP TABLE IF EXISTS `Book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Book` (
+  `isbn` bigint NOT NULL,
+  `createdAt` datetime(6) NOT NULL,
+  `updatedAt` datetime(6) NOT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount` bigint DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` bigint NOT NULL,
+  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`isbn`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `User`
 --
 
@@ -32,20 +55,22 @@ DROP TABLE IF EXISTS `User`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User` (
   `userId` bigint NOT NULL AUTO_INCREMENT,
-  `nickName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sex` enum('M','F') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'M',
-  `birth` date DEFAULT NULL COMMENT '생년월일',
-  `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '프로필 사진 URL',
-  `companyEmail` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '회사 Email',
-  `isCompanyEmailValid` tinyint(1) NOT NULL DEFAULT '0' COMMENT '회사 이메일 인증 여부',
-  `allowedPrivacyTerm` bit(1) NOT NULL COMMENT '이용약관 동의여부',
-  `allowedUsedTerm` bit(1) NOT NULL COMMENT '개인정보활용동의 약관 확인 여부',
-  `state` tinyint(1) NOT NULL COMMENT '상태값(0: 삭제, 1: 사용중)',
   `createdAt` datetime(6) NOT NULL,
   `updatedAt` datetime(6) NOT NULL,
-  `deletedAt` datetime DEFAULT NULL,
+  `allowedPrivacyTerm` tinyint NOT NULL,
+  `allowedUsedTerm` tinyint NOT NULL,
+  `birth` date NOT NULL,
+  `companyEmail` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `companyName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deletedAt` datetime(6) DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `isCompanyEmailValid` tinyint NOT NULL,
+  `nickName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sex` enum('M','F') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'M',
+  `state` tinyint NOT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,17 +82,17 @@ DROP TABLE IF EXISTS `UserAccount`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `UserAccount` (
   `userAccountId` bigint NOT NULL AUTO_INCREMENT,
-  `userId` bigint NOT NULL COMMENT '유저 ID',
-  `accountType` enum('KAKAO','GOOGLE','NAVER','APPLE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'SNS 계정 타입',
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `socialAccountId` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Social 계정 oauth ID',
-  `state` tinyint(1) NOT NULL COMMENT '상태값(0: 삭제, 1: 사용중)',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `deletedAt` datetime DEFAULT NULL,
+  `createdAt` datetime(6) NOT NULL,
+  `updatedAt` datetime(6) NOT NULL,
+  `deletedAt` datetime(6) DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `socialAccountId` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `socialAccountType` enum('KAKAO','GOOGLE','NAVER','APPLE') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` bit(1) NOT NULL DEFAULT b'1',
+  `userId` bigint NOT NULL,
   PRIMARY KEY (`userAccountId`),
-  KEY `userAccount_user_userId_fk` (`userId`),
-  CONSTRAINT `userAccount_user_userId_fk` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+  UNIQUE KEY `UK_qseudf7rceerpt5obt2pc3a8p` (`userId`),
+  CONSTRAINT `FK4qg49pla0p6g97dtuiouja1o6` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +105,4 @@ CREATE TABLE `UserAccount` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-03  2:27:25
+-- Dump completed on 2022-02-15 23:00:00
