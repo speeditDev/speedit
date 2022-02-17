@@ -34,6 +34,7 @@ dependencies {
     implementation("com.google.guava:guava:31.0.1-jre")
     implementation("com.graphql-java:graphql-java:17.3")
     implementation("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
+    implementation("com.google.api-client:google-api-client:1.31.5")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
