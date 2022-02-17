@@ -1,6 +1,5 @@
 package com.speedit.server.config
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
@@ -11,12 +10,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import java.util.*
 import javax.persistence.EntityManagerFactory
 import javax.sql.DataSource
 
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = ["com.speedit.server.repository"])
 @EnableTransactionManagement
 class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
                         @Value("\${spring.datasource.username}") val userName: String,
