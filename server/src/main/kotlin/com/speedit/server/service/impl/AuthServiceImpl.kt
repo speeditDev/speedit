@@ -54,6 +54,11 @@ class AuthServiceImpl @Autowired constructor(private val userRepository: UserRep
         TODO("Not yet implemented")
     }
 
+    /**
+     * @param socialAccountId
+     * @param token
+     * @param accountType - 소셜계정타입("KAKAO", "NAVER", "GOOGLE", "APPLE")
+     */
     override fun signIn(socialAccountId: String, token: String, accountType: String): String {
         TODO("Not yet implemented")
     }
