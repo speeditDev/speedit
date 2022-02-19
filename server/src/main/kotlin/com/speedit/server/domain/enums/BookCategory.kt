@@ -1,9 +1,11 @@
 package com.speedit.server.domain.enums
 
 import com.speedit.server.domain.BaseEntity
+import com.speedit.server.domain.Book
 import org.hibernate.Hibernate
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -11,7 +13,11 @@ import javax.persistence.Table
 data class BookCategory(
     @Id
     val code:Long,
-    var name:String): BaseEntity() {
+    var name:String,
+
+    @OneToMany(mappedBy = "bookCategory")
+    val bookList:List<Book> = ArrayList()
+): BaseEntity() {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

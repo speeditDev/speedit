@@ -28,6 +28,12 @@ class BookCategoryRepositoryTest {
                 .orElseThrow()
         }
 
+        fun getRandomBookCategory(bookCategoryRepository: BookCategoryRepository): BookCategory {
+            return bookCategoryRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+
         fun createBookCategory(bookCategoryRepository: BookCategoryRepository, name: String): BookCategory {
             return BookCategory(generateNewBookCategoryCode(bookCategoryRepository), name)
         }

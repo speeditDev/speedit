@@ -18,55 +18,19 @@
 --
 -- Current Database: `book-plate`
 --
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `book-plate` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `book-plate` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `book-plate`;
 
---
--- Table structure for table `Book`
---
-
+DROP TABLE IF EXISTS `UserAccount`;
+DROP TABLE IF EXISTS `User`;
 DROP TABLE IF EXISTS `Book`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Book` (
-                        `isbn` bigint NOT NULL,
-                        `createdAt` datetime(6) NOT NULL,
-                        `updatedAt` datetime(6) NOT NULL,
-                        `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `discount` bigint DEFAULT NULL,
-                        `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `price` bigint NOT NULL,
-                        `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        PRIMARY KEY (`isbn`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `BookCategory`
---
-
 DROP TABLE IF EXISTS `BookCategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `BookCategory` (
-                                `code` bigint NOT NULL,
-                                `createdAt` datetime(6) NOT NULL,
-                                `updatedAt` datetime(6) NOT NULL,
-                                `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                                PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `User`
 --
 
-DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User` (
@@ -93,7 +57,6 @@ CREATE TABLE `User` (
 -- Table structure for table `UserAccount`
 --
 
-DROP TABLE IF EXISTS `UserAccount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `UserAccount` (
@@ -112,6 +75,46 @@ CREATE TABLE `UserAccount` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+--
+-- Table structure for table `BookCategory`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `BookCategory` (
+                                `code` bigint NOT NULL,
+                                `createdAt` datetime(6) NOT NULL,
+                                `updatedAt` datetime(6) NOT NULL,
+                                `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                                PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Book`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Book` (
+                        `isbn` bigint NOT NULL,
+                        `createdAt` datetime(6) NOT NULL,
+                        `updatedAt` datetime(6) NOT NULL,
+                        `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `discount` bigint NOT NULL,
+                        `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `price` bigint NOT NULL,
+                        `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                        `category_code` bigint DEFAULT NULL,
+                        PRIMARY KEY (`isbn`),
+                        KEY `FKaf93xcr9wchht6viajwunyh75` (`category_code`),
+                        CONSTRAINT `FKaf93xcr9wchht6viajwunyh75` FOREIGN KEY (`category_code`) REFERENCES `BookCategory` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

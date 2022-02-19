@@ -1,9 +1,12 @@
 package com.speedit.server.domain
 
+import com.speedit.server.domain.enums.BookCategory
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.ISBN
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 import javax.persistence.Table
 import javax.validation.constraints.PositiveOrZero
 
@@ -22,8 +25,13 @@ data class Book(
     var author: String?,
     var discount: Long = 0,
     var publisher: String?,
-    var description: String = ""
-    ) : BaseEntity() {
+    var description: String = "",
+
+    @ManyToOne
+    @JoinColumn(name = "category_code")
+    var bookCategory: BookCategory? = null
+) : BaseEntity() {
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
