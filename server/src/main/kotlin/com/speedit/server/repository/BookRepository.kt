@@ -1,4 +1,4 @@
-package com.speedit.server.respository
+package com.speedit.server.repository
 
 import com.speedit.server.domain.Book
 import org.springframework.data.jpa.repository.JpaRepository
