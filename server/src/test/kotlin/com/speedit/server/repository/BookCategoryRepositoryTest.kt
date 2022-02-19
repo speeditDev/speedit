@@ -1,6 +1,6 @@
 package com.speedit.server.repository
 
-import com.speedit.server.domain.enums.BookCategory
+import com.speedit.server.domain.BookCategory
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -11,6 +11,8 @@ import org.springframework.test.context.TestPropertySource
 import java.util.stream.LongStream
 
 import org.assertj.core.api.Assertions.*
+import org.springframework.data.domain.Pageable
+import java.util.*
 
 
 @TestPropertySource("classpath:/application.yaml")
@@ -28,8 +30,15 @@ class BookCategoryRepositoryTest {
                 .orElseThrow()
         }
 
-        fun getRandomBookCategory(bookCategoryRepository: BookCategoryRepository): BookCategory {
+        fun getAnyBookCategory(bookCategoryRepository: BookCategoryRepository): BookCategory {
             return bookCategoryRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+
+        fun getOtherBookCategory(bookCategoryRepository: BookCategoryRepository, bookCategory: BookCategory): BookCategory {
+            return bookCategoryRepository.findAll().stream()
+                .filter{ value -> !Objects.equals(bookCategory, value)}
                 .findAny()
                 .orElse(null)
         }
@@ -116,7 +125,7 @@ class BookCategoryRepositoryTest {
         )
 
         // When
-        val bookCategoryList = bookCategoryRepository.findByName(bookCategoryName)
+        val bookCategoryList = bookCategoryRepository.findByName(bookCategoryName, Pageable.unpaged())
 
         // Then
         assertThat(bookCategoryList)

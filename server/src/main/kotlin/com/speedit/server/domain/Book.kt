@@ -1,6 +1,5 @@
 package com.speedit.server.domain
 
-import com.speedit.server.domain.enums.BookCategory
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.ISBN
 import javax.persistence.Entity
@@ -42,9 +41,9 @@ data class Book(
 
     override fun hashCode(): Int = javaClass.hashCode()
 
-    @Override
     override fun toString(): String {
-        return this::class.simpleName + "(isbn = $isbn , createdAt = $createdAt , updatedAt = $updatedAt , title = $title , price = $price , link = $link , image = $image , author = $author , discount = $discount , publisher = $publisher , description = $description )"
+        return this::class.simpleName + "(isbn=$isbn, title='$title', price=$price, link=$link, image=$image, author=$author, discount=$discount, publisher=$publisher, description='$description', bookCategory=$bookCategory)"
     }
+
 
 }

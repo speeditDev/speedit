@@ -1,7 +1,5 @@
-package com.speedit.server.domain.enums
+package com.speedit.server.domain
 
-import com.speedit.server.domain.BaseEntity
-import com.speedit.server.domain.Book
 import org.hibernate.Hibernate
 import javax.persistence.Entity
 import javax.persistence.Id
