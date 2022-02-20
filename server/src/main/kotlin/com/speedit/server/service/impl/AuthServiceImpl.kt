@@ -1,5 +1,6 @@
 package com.speedit.server.service.impl
 
+import com.speedit.server.common.SocialAPI
 import com.speedit.server.domain.User
 import com.speedit.server.dto.auth.SignUpDto
 import com.speedit.server.repository.jpa.UserRepository
@@ -8,34 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
+import javax.transaction.Transactional
 
 @Service
-class AuthServiceImpl @Autowired constructor(private val userRepository: UserRepository) : AuthService {
+class AuthServiceImpl @Autowired constructor(
+    @Autowired private val userRepository: UserRepository,
+    @Autowired private val socialAPI: SocialAPI
+) : AuthService {
     override fun signUp(signUpDto: SignUpDto): User {
-        val isUserExist = userRepository.existsByEmail(signUpDto.email);
-
-        if (isUserExist) {
-            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "이미 존재하는 이메일입니다.")
-        }
-
-        val insertUser = User(
-            userId = null,
-            nickName = signUpDto.nickName,
-            sex = signUpDto.sex,
-            birth = signUpDto.birth,
-            thumbnail = signUpDto.thumbnail,
-            email = signUpDto.email,
-            companyName = signUpDto.companyName,
-            companyEmail = signUpDto.companyEmail,
-            allowedPrivacyTerm = signUpDto.allowedPrivacyTerm,
-            allowedUsedTerm = signUpDto.allowedUsedTerm,
-            isCompanyEmailValid = false,
-            state = 1
-        )
-
-        val user = userRepository.save(insertUser);
-
-        return user
+        TODO()
     }
 
     private fun checkGoogleEmail() {
@@ -54,13 +36,28 @@ class AuthServiceImpl @Autowired constructor(private val userRepository: UserRep
         TODO("Not yet implemented")
     }
 
-    /**
-     * @param socialAccountId
-     * @param token
-     * @param accountType - 소셜계정타입("KAKAO", "NAVER", "GOOGLE", "APPLE")
-     */
     override fun signIn(socialAccountId: String, token: String, accountType: String): String {
-        TODO("Not yet implemented")
+        val accountId: String;
+
+        when (accountType) {
+            "KAKAO" -> {
+                val (id) = socialAPI.verifyKakaoAccount(token)
+                accountId = "KAKAO_$id"
+            }
+            "NAVER" -> {
+                val (id) = socialAPI.verifyKakaoAccount(token)
+                accountId = "NAVER_$id"
+            }
+            "GOOGLE" -> {
+                val (id) = socialAPI.verifyKakaoAccount(token)
+                accountId = "GOOGLE_$id"
+            }
+            "APPLE" -> {
+                val (id) = socialAPI.verifyKakaoAccount(token)
+                accountId = "APPLE_$id"
+            }
+        }
+        TODO()
     }
 
     override fun signOut(): Void {

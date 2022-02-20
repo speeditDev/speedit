@@ -2,11 +2,7 @@ package com.speedit.server.domain
 
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.ISBN
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.PositiveOrZero
 
 @Entity
@@ -27,7 +23,7 @@ data class Book(
     var description: String = "",
 
     @ManyToOne
-    @JoinColumn(name = "category_code")
+    @JoinColumn(name = "categoryCode")
     var bookCategory: BookCategory? = null
 ) : BaseEntity() {
 

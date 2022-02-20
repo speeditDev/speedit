@@ -36,8 +36,6 @@ class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
     @Bean
     fun entityManagerFactory(): LocalContainerEntityManagerFactoryBean {
         val vendorAdapter = HibernateJpaVendorAdapter()
-        vendorAdapter.setGenerateDdl(false);
-        vendorAdapter.setShowSql(true);
 
         val factory = LocalContainerEntityManagerFactoryBean();
         factory.jpaVendorAdapter = vendorAdapter;
