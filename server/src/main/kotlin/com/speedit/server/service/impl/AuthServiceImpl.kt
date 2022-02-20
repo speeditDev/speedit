@@ -2,7 +2,7 @@ package com.speedit.server.service.impl
 
 import com.speedit.server.domain.User
 import com.speedit.server.dto.auth.SignUpDto
-import com.speedit.server.repository.UserRepository
+import com.speedit.server.repository.jpa.UserRepository
 import com.speedit.server.service.AuthService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

@@ -5,6 +5,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
@@ -14,7 +15,8 @@ import javax.persistence.EntityManagerFactory
 import javax.sql.DataSource
 
 @Configuration
-@EnableJpaRepositories(basePackages = ["com.speedit.server.repository"])
+@EnableJpaRepositories(basePackages = ["com.speedit.server.repository.jpa"])
+@EnableRedisRepositories(basePackages = ["com.speedit.server.repository.redis"])
 @EnableTransactionManagement
 class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
                         @Value("\${spring.datasource.username}") val userName: String,

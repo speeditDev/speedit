@@ -2,6 +2,7 @@ package com.speedit.server.repository
 
 import com.speedit.server.domain.User
 import com.speedit.server.domain.enums.Sex
+import com.speedit.server.repository.jpa.UserRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
