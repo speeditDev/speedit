@@ -1,0 +1,11 @@
+type Mutation {
+    signUp(singUpInput: SignupInput): Boolean
+}
+
+type Query {
+
+}
+
+input SignupInput {
+    nickName: String
+}

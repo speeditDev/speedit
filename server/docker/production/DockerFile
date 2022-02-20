@@ -11,6 +11,12 @@ RUN ./gradlew bootJar
 
 # deploy
 FROM openjdk:11
+
+ENV DATABASE_HOST $DATABASE_HOST
+ENV DATABASE_USER $DATABASE_USER
+ENV DATABASE_PASSWORD $DATABASE_PASSWORD
+ENV DATABASE_NAME $DATABASE_NAME
+
 RUN mkdir /opt/app
 COPY --from=builder build/libs/*.jar /opt/app/server.jar
 EXPOSE 8080

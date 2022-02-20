@@ -1,22 +1,22 @@
 package com.speedit.server.config
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import java.util.*
 import javax.persistence.EntityManagerFactory
 import javax.sql.DataSource
 
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = ["com.speedit.server.repository.jpa"])
+@EnableRedisRepositories(basePackages = ["com.speedit.server.repository.redis"])
 @EnableTransactionManagement
 class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
                         @Value("\${spring.datasource.username}") val userName: String,
@@ -36,8 +36,6 @@ class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
     @Bean
     fun entityManagerFactory(): LocalContainerEntityManagerFactoryBean {
         val vendorAdapter = HibernateJpaVendorAdapter()
-        vendorAdapter.setGenerateDdl(false);
-        vendorAdapter.setShowSql(true);
 
         val factory = LocalContainerEntityManagerFactoryBean();
         factory.jpaVendorAdapter = vendorAdapter;

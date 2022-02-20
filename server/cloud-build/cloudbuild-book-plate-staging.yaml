@@ -1,36 +1,40 @@
 #
-# Copyright 2021 lemonade
+# Copyright 2021 Speedit
 #
 
 steps:
 # Build the container image
-- name: gcr.io/cloud-builders/docker
-  args: ['build',
-    '-t', 'gcr.io/book-plate/book-plate-backend-staging',
-    '-f', '../docker/book-plate/staging/Dockerfile',
-    '../.'
-  ]
+- name: gradle:7.3.3-jdk11
+  dir: './server'
+  entrypoint: './gradlew'
+  args: ['assemble']
 
-# Check either book-plate can start or not
 - name: gcr.io/cloud-builders/docker
-  args: ['run',
-    '--rm',
-    '--env', 'SERVICE_ENVIRONMENT=build',
-    'gcr.io/book-plate/book-plate-backend-staging',
+  dir:
+  args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/book-plate-backend-staging:$COMMIT_SHA',
+      '-f', './server/docker/staging/DockerFile',
+      '--build-arg=JAR_FILE=./server/build/libs/server-1.0.0-SNAPSHOT.jar',
+      '.'
   ]
 
 # Push the container image to Container Registry
 - name: gcr.io/cloud-builders/docker
-  args: ['push', 'gcr.io/book-plate/book-plate-backend-staging']
+  args: ['push', 'gcr.io/$PROJECT_ID/book-plate-backend-staging:$COMMIT_SHA']
+
 
 # Deploy book-plate backend application image to Cloud Run
-- name: gcr.io/cloud-builders/gcloud
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
   args: [
-    'beta','run', 'deploy', 'book-plate-backend-staging',
-    '--image=gcr.io/book-plate/book-plate-backend-staging',
-    '--region=asia-northeast3',
-    '--platform=managed',
-    '--allow-unauthenticated',
-    '--min-instances=1',
-    '--memory=1024M',
+      'run', 'deploy', 'book-plate-backend-staging',
+      '--image=gcr.io/$PROJECT_ID/book-plate-backend-staging:$COMMIT_SHA',
+      '--region=asia-northeast1',
+      '--platform=managed',
+      '--allow-unauthenticated',
+      '--min-instances=1',
+      '--max-instances=5',
+      '--memory=1024M',
+      '--vpc-connector=vpc-connector'
   ]

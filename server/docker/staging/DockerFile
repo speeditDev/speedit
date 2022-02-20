@@ -1,17 +1,25 @@
-# builder
-FROM openjdk:11 AS builder
-COPY gradlew .
-COPY settings.gradle.kts .
-COPY build.gradle.kts .
-COPY gradle gradle
-COPY src src
-RUN chmod +x ./gradlew
-RUN ./gradlew bootJar
+# # builder
+# FROM openjdk:11 AS builder
+# COPY gradlew .
+# COPY settings.gradle.kts .
+# COPY build.gradle.kts .
+# COPY gradle gradle
+# COPY src src
+# RUN chmod +x ./gradlew
+# RUN ./gradlew bootJar
 
 
 # deploy
 FROM openjdk:11
+ENV SERVICE_ENV staging
+ENV DATABASE_HOST 10.73.242.2
+ENV DATABASE_USER speedit
+ENV DATABASE_PASSWORD afdieqAndskl23EEdsfji
+ENV DATABASE_NAME book-plate
+ENV GOOGLE_OAUTH2_CLIENT_ID 91270169157-u2ah895o9qi0fvnu50lkidfeemj7av4d.apps.googleusercontent.com
+
+ARG JAR_FILE
 RUN mkdir /opt/app
-COPY --from=builder build/libs/*.jar /opt/app/server.jar
+COPY $JAR_FILE server.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/opt/app/server.jar"]
+ENTRYPOINT ["java", "-jar", "server.jar"]
