@@ -1,6 +1,8 @@
 package com.speedit.server.repository
 
 import com.speedit.server.domain.Book
+import com.speedit.server.repository.jpa.BookCategoryRepository
+import com.speedit.server.repository.jpa.BookRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package com.speedit.server.repository
+package com.speedit.server.repository.jpa
 
 import com.speedit.server.domain.BookCategory
 import org.springframework.data.domain.Page

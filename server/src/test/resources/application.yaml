@@ -21,7 +21,7 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: always
+      mode: embedded
       schema-locations: sql/schema-mysql.sql
       data-locations:   sql/data-mysql.sql
 
