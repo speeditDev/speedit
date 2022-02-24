@@ -1,10 +1,11 @@
-package com.speedit.server.common
+package com.speedit.server.common.impl
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
+import com.speedit.server.common.SocialAPIProvider
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.HttpEntity
@@ -14,35 +15,30 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
-import org.springframework.util.StringUtils
 import java.time.Duration
 
-
 @Component
-class SocialAPI(
-    @Value("\${google_oauth2_client_id}") private val googleClientId: String,
-) {
+class SocialAPIProviderImpl constructor(@Value("\${google-oauth2-client-id}") private val googleClientId: String): SocialAPIProvider {
     companion object{
         private const val KAKAO_ACCOUNT_API_URL = "https://kapi.kakao.com/v2/user/me"
     }
 
-    data class VerifiedResult(val id: String, val email: String?)
-
     private val googleVerifier: GoogleIdTokenVerifier = GoogleIdTokenVerifier.Builder(
         NetHttpTransport(),
-        GsonFactory())
+        GsonFactory()
+    )
         .setAudience(listOf(googleClientId))
         .build()
 
 
-    fun verifyGoogleAccount(idToken: String): VerifiedResult {
+    override fun verifyGoogleAccount(idToken: String): SocialAPIProvider.VerifiedResult {
         val verified: GoogleIdToken = googleVerifier.verify(idToken)
             ?: throw RuntimeException("잘못된 토큰입니다.")
 
-        return VerifiedResult(verified.payload.subject, verified.payload.email)
+        return SocialAPIProvider.VerifiedResult(verified.payload.subject, verified.payload.email)
     }
 
-    fun verifyKakaoAccount(accessToken: String): VerifiedResult {
+    override fun verifyKakaoAccount(accessToken: String): SocialAPIProvider.VerifiedResult {
         // api 호출용 restTemplate 생성
         val restTemplate = RestTemplateBuilder()
             .setConnectTimeout(Duration.ofSeconds(3))
@@ -70,19 +66,15 @@ class SocialAPI(
         val id = response.body?.get("id")?.asText() ?: throw RuntimeException("유저 정보를 확인할 수 없습니다");
         val email = response.body?.get("kakao_account")?.get("email")?.asText()
 
-        if (!StringUtils.hasLength(id)) {
-            throw RuntimeException("test")
-        }
 
-        return VerifiedResult(id, email)
+        return SocialAPIProvider.VerifiedResult(id, email)
     }
 
-    fun verifyNaverAccount(accessToken: String) : VerifiedResult {
+    override fun verifyNaverAccount(accessToken: String) : SocialAPIProvider.VerifiedResult {
         TODO()
     }
 
-    fun verifyAppleAccount(accessToken: String) : VerifiedResult {
+    override fun verifyAppleAccount(accessToken: String) : SocialAPIProvider.VerifiedResult {
         TODO()
     }
 }
-

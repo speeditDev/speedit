@@ -1,0 +1,9 @@
+scalar Upload
+
+type Query {
+    ping: String!
+}
+
+type Mutation {
+    checkHealth(message: String): String!
+}

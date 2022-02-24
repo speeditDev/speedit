@@ -1,6 +1,6 @@
 # env
-google_oauth2_client_id: ${GOOGLE_OAUTH2_CLIENT_ID}
-# GOOGLE_OAUTH2_CLIENT_ID=91270169157-u2ah895o9qi0fvnu50lkidfeemj7av4d.apps.googleusercontent.com
+google-oauth2-client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
+jwt-secret-key: ${JWT_SECRET_KEY}
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,6 +16,15 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    client-type: lettuce
+    connect-timeout: 1m
+  data:
+    redis:
+      repositories:
+        enabled: false
 logging:
   level:
     org:
@@ -24,3 +33,42 @@ logging:
           descriptor:
             sql:
               BasicBinder: trace
+graphql:
+  servlet:
+    enabled: true
+    mapping: /graphql
+    exception-handlers-enabled: true
+    cors:
+      allowed-methods: GET, HEAD, POST
+      allowed-origins: "*"
+    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+  tools:
+    schema-location-pattern: "graphql/**/*.graphqls"
+    # Enable or disable the introspection query. Disabling it puts your server in contravention of the GraphQL
+    # specification and expectations of most clients, so use this option with caution
+    introspection-enabled: true
+    use-default-objectmapper: true
+  playground:
+    mapping: /playground
+    endpoint: /graphql
+    subscriptionEndpoint: /subscriptions
+    enabled: true
+    pageTitle: Playground
+    cdn:
+      enabled: false
+      version: latest
+    settings:
+      editor.fontFamily: "'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace"
+      editor.fontSize: 14
+      editor.reuseHeaders: true
+      prettier.printWidth: 80
+      prettier.tabWidth: 2
+      prettier.useTabs: false
+      schema.polling.enable: true
+      schema.polling.endpointFilter: "*localhost*"
+      schema.polling.interval: 2000
+      schema.disableComments: true
+      tracing.hideTracingResponse: true
+  extended-scalars: Date, DateTime, Long
+jwt:
+  secret: ${jwt-secret-key}

@@ -1,11 +1,76 @@
-type Mutation {
-    signUp(singUpInput: SignupInput): Boolean
+scalar Date
+
+extend type Mutation {
+    signIn(signInInput: SignInInput): SignInResult
+    signInWithAccessToken(accessToken: String): SignInWithAccessTokenResult
+    refreshAccessToken(refreshToken: String): RefreshAccessTokenResult
+    signUp(signUpInput: SignUpInput): SignUpResult
 }
 
-type Query {
-
+input SignInInput {
+    "소셜 계정 ID 값"
+    socialAccountId: String!,
+    "소셜 계정 토큰"
+    socialToken: String!,
+    """소셜계정타입(GOOGLE, KAKAO, NAVER, APPLE)"""
+    accountType: String!
 }
 
-input SignupInput {
-    nickName: String
+type Token {
+    accessToken: String!,
+    refreshToken: String!,
+}
+
+type SignInResult {
+    """
+    "ok" -         -> 정상토큰발급
+    "non-user"     -> 미가입
+    """
+    status: String!,
+    token: Token,
+    message: String
+}
+
+type SignInWithAccessTokenResult {
+    status: String!
+}
+
+type RefreshAccessTokenResult {
+    """
+    "ok"         - 인증 성공
+    "invalid"    - 인증 실패
+    """
+    status: String!,
+    token: Token
+}
+
+input SignUpInput {
+    "GOOGLE, KAKAO, NAVER, APPLE"
+    socialAccountType: String!,
+    socialAccountId: String!,
+    socialToken: String!,
+    nickName: String!,
+    thumbnail: String,
+    sex: String,
+    birth: Date,
+    email: String,
+    companyName: String,
+    companyEmail: String,
+    allowedPrivacyTerm: Boolean!,
+    allowedUsedTerm: Boolean!
+}
+
+type SignUpResult {
+    """
+    * ok       -> 성공 \n
+    * fail     -> 실패 \n
+    * already_exist -> 이미 존재하는 계정
+    """
+    status: String!,
+    token: Token,
+    message: String
+}
+
+schema {
+    mutation: Mutation
 }

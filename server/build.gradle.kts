@@ -31,14 +31,25 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.google.guava:guava:31.0.1-jre")
-    implementation("com.graphql-java:graphql-java:17.3")
-    implementation("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
-    implementation("com.google.api-client:google-api-client:1.31.5")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")
+
+    // google api
+    implementation("com.google.api-client:google-api-client:1.31.5")
+    implementation("com.google.guava:guava:31.0.1-jre")
+
+    // graphql
+    implementation("com.graphql-java-kickstart:graphql-java-tools:12.0.2")
+    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0")
+    implementation("com.graphql-java:graphql-java-extended-scalars:17.0")
+
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
+
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0")
 }
 
 tasks.withType<KotlinCompile> {

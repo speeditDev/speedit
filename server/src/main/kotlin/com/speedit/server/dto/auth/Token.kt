@@ -1,6 +1,6 @@
 package com.speedit.server.dto.auth
 
-data class TokenDto (
+class Token (
     val accessToken: String,
-    val refreshToken: String,
-        )
+    val refreshToken: String
+)

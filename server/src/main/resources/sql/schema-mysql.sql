@@ -76,19 +76,19 @@ CREATE TABLE `User` (
                         `userId` bigint NOT NULL AUTO_INCREMENT,
                         `socialAccountId` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
                         `socialAccountType` enum('KAKAO','GOOGLE','NAVER','APPLE') COLLATE utf8mb4_unicode_ci NOT NULL,
-                        `nickName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `sex` enum('M','F') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'M',
+                        `nickName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                        `sex` enum('M','F') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                         `birth` date DEFAULT NULL COMMENT '생년월일',
                         `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '프로필 사진 URL',
-                        `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `companyName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                        `companyEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '회사 Email',
+                        `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '이메일',
+                        `companyName` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '회사명',
+                        `companyEmail` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '회사 Email',
                         `isCompanyEmailValid` tinyint(1) NOT NULL DEFAULT '0' COMMENT '회사 이메일 인증 여부',
-                        `allowedPrivacyTerm` tinyint(1) NOT NULL COMMENT '이용약관 동의여부',
-                        `allowedUsedTerm` tinyint(1) NOT NULL COMMENT '개인정보활용동의 약관 확인 여부',
+                        `allowedPrivacyTerm` tinyint(1) NOT NULL DEFAULT '0' COMMENT '이용약관 동의여부',
+                        `allowedUsedTerm` tinyint(1) NOT NULL DEFAULT '0' COMMENT '개인정보활용동의 약관 확인 여부',
                         `state` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'created' COMMENT '상태값( "created": 사용중, "deleted": 삭제됨)',
-                        `createdAt` datetime(6) NOT NULL,
-                        `updatedAt` datetime(6) NOT NULL,
+                        `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         `deletedAt` datetime DEFAULT NULL,
                         PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -103,4 +103,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-20 21:49:03
+-- Dump completed on 2022-02-21  1:55:24

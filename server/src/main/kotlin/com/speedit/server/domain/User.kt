@@ -11,47 +11,47 @@ import javax.persistence.*
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var userId: Long?,
+    var userId: Long? = null,
 
     @Column(nullable = false)
-    val socialAccountId: String,
+    var socialAccountId: String,
 
     @Enumerated(value = EnumType.STRING)
     @Column(columnDefinition = "ENUM('KAKAO','GOOGLE','NAVER','APPLE')", nullable = true)
-    var socialAccountType: SocialAccountType?,
+    var socialAccountType: SocialAccountType,
 
     @Column(length = 50, nullable = false)
     var nickName: String,
 
-    var thumbnail: String?,
+    var thumbnail: String? = null,
 
-    @Column(nullable = false)
-    var birth: LocalDate,
+    @Column
+    var birth: LocalDate? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "ENUM('M', 'F') DEFAULT 'M'")
-    var sex: Sex,
-
-    @Column(length = 100, nullable = false)
-    var email: String,
+    @Column(columnDefinition = "ENUM('M', 'F')")
+    var sex: Sex? = null,
 
     @Column(length = 100)
-    var companyName: String?,
+    var email: String? = null,
 
     @Column(length = 100)
-    var companyEmail: String?,
+    var companyName: String? = null,
+
+    @Column(length = 100)
+    var companyEmail: String? = null,
 
     @Column(columnDefinition = "BIT(1)  DEFAULT 0", length = 1, nullable = false)
-    var isCompanyEmailValid: Boolean,
+    var isCompanyEmailValid: Boolean= false,
 
     @Column(columnDefinition = "BIT(1)  DEFAULT 0", length = 1, nullable = false)
-    var allowedUsedTerm: Boolean,
+    var allowedUsedTerm: Boolean= false,
 
     @Column(columnDefinition = "BIT(1) DEFAULT 0", length = 1, nullable = false)
-    var allowedPrivacyTerm: Boolean,
+    var allowedPrivacyTerm: Boolean = false,
 
     @Column(length = 10, nullable = false)
-    var state: String,
+    var state: String = "created",
 
     @Column(nullable = true)
     var deletedAt: LocalDateTime? = null

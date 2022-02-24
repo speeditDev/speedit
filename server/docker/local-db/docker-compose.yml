@@ -6,6 +6,7 @@ services:
     ports:
       - "6379:6379"
     restart: always
+    platform: linux/x86_64
   mysql-db:
     container_name: speedit-local-db
     image: mysql:8.0

@@ -5,4 +5,5 @@ enum class SocialAccountType(label: String) {
     NAVER("NAVER"),
     GOOGLE("GOOGLE"),
     APPLE("APPLE");
+
 }

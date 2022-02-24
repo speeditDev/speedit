@@ -15,8 +15,8 @@ import javax.persistence.EntityManagerFactory
 import javax.sql.DataSource
 
 @Configuration
-@EnableJpaRepositories(basePackages = ["com.speedit.server.repository.jpa"])
-@EnableRedisRepositories(basePackages = ["com.speedit.server.repository.redis"])
+@EnableJpaRepositories("com.speedit.server.repository.jpa")
+@EnableRedisRepositories("com.speedit.server.repository.redis")
 @EnableTransactionManagement
 class DataSourceConfig (@Value("\${spring.datasource.url}") val host:String,
                         @Value("\${spring.datasource.username}") val userName: String,

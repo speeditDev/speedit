@@ -1,5 +1,6 @@
 package com.speedit.server.common
 
+import com.speedit.server.common.impl.SocialAPIProviderImpl
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.DisplayName
 
 internal class SocialAPITest {
 
-    private val socialAPI = SocialAPI("91270169157-u2ah895o9qi0fvnu50lkidfeemj7av4d.apps.googleusercontent.com")
+    private val socialAPI = SocialAPIProviderImpl("91270169157-u2ah895o9qi0fvnu50lkidfeemj7av4d.apps.googleusercontent.com")
 
     @Test
     @DisplayName("구글 유저정보 확인 api test")
