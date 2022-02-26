@@ -72,3 +72,10 @@ graphql:
   extended-scalars: Date, DateTime, Long
 jwt:
   secret: ${jwt-secret-key}
+
+book:
+  api:
+    aladin:
+      base-url: http://www.aladin.co.kr/ttb/api
+      ttbKey: ttbrolroralra1814001              # TODO: jasypt config
+      apiVersion: 20131101

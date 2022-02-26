@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface BookCategoryRepository: JpaRepository<BookCategory, Long>  {
     fun findByName(name: String, pageable: Pageable): Page<BookCategory>
+    fun findByNameContains(bookCategoryName: String, pageable: Pageable): Page<BookCategory>
 }

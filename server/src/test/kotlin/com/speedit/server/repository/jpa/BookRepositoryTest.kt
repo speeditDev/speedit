@@ -1,25 +1,35 @@
-package com.speedit.server.repository
+package com.speedit.server.repository.jpa
 
 import com.speedit.server.domain.Book
-import com.speedit.server.repository.jpa.BookCategoryRepository
-import com.speedit.server.repository.jpa.BookRepository
+import com.speedit.server.domain.BookCategory
+import com.speedit.server.repository.jpa.annotation.DataJpaTestConfig
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.Pageable
-import org.springframework.test.context.TestPropertySource
 
-@TestPropertySource("classpath:/application.yaml")
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTestConfig
 class BookRepositoryTest {
     @Autowired
     lateinit var bookRepository: BookRepository
 
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
+
+
+    fun saveBookCategory(bookCategoryName: String): BookCategory {
+        return BookCategoryRepositoryTest.saveBookCategory(bookCategoryRepository, bookCategoryName)
+    }
+
+    @BeforeEach
+    fun beforeEach() {
+        saveBookCategory("book-category-0001")
+        saveBookCategory("book-category-0002")
+        saveBookCategory("book-category-0003")
+        saveBookCategory("book-category-0004")
+        saveBookCategory("book-category-0005")
+    }
 
     @Test
     fun test_save_book() {

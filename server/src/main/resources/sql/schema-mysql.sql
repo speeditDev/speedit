@@ -19,15 +19,38 @@
 -- Current Database: `book-plate`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `book-plate` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `book-plate`;
 
 USE `book-plate`;
+
+DROP TABLE IF EXISTS `Book`;
+DROP TABLE IF EXISTS `BookCategory`;
+
+--
+-- Table structure for table `BookCategory`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `BookCategory` (
+                                `code` bigint NOT NULL,
+                                `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                                `depth0` varchar(255),
+                                `depth1` varchar(255),
+                                `depth2` varchar(255),
+                                `depth3` varchar(255),
+                                `depth4` varchar(255),
+                                `depth5` varchar(255),
+                                `createdAt` datetime(6) NOT NULL,
+                                `updatedAt` datetime(6) NOT NULL,
+                                PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `Book`
 --
 
-DROP TABLE IF EXISTS `Book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Book` (
@@ -46,22 +69,6 @@ CREATE TABLE `Book` (
                         PRIMARY KEY (`isbn`),
                         KEY `userAccount_user_userId_fk` (`categoryCode`),
                         CONSTRAINT `FKaf93xcr9wchht6viajwunyh75` FOREIGN KEY (`categoryCode`) REFERENCES `BookCategory` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `BookCategory`
---
-
-DROP TABLE IF EXISTS `BookCategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `BookCategory` (
-                                `code` bigint NOT NULL,
-                                `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-                                `createdAt` datetime(6) NOT NULL,
-                                `updatedAt` datetime(6) NOT NULL,
-                                PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

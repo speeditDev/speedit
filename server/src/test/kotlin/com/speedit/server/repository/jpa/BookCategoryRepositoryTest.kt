@@ -1,24 +1,18 @@
-package com.speedit.server.repository
+package com.speedit.server.repository.jpa
 
 import com.speedit.server.domain.BookCategory
-import com.speedit.server.repository.jpa.BookCategoryRepository
+import com.speedit.server.repository.jpa.annotation.DataJpaTestConfig
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.TestPropertySource
 import java.util.stream.LongStream
 
 import org.assertj.core.api.Assertions.*
 import org.springframework.data.domain.Pageable
 import java.util.*
 
-
-@TestPropertySource("classpath:/application.yaml")
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTestConfig
 class BookCategoryRepositoryTest {
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
@@ -27,7 +21,7 @@ class BookCategoryRepositoryTest {
         fun generateNewBookCategoryCode(bookCategoryRepository: BookCategoryRepository): Long {
             return LongStream.range(1, Long.MAX_VALUE)
                 .filter { id -> bookCategoryRepository.findById(id).isEmpty }
-                .findFirst()
+                .findAny()
                 .orElseThrow()
         }
 
@@ -133,6 +127,35 @@ class BookCategoryRepositoryTest {
             .isNotNull
             .isNotEmpty
             .contains(bookCategory)
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["it", "프로그래밍", "운영체제"])
+    fun test_find_book_category_by_name_contains(bookCategoryName: String) {
+        // Given
+        val bookCategory = saveBookCategory(
+            bookCategoryRepository,
+            bookCategoryName
+        )
+
+        val bookCategory2 = saveBookCategory(
+            bookCategoryRepository,
+            bookCategoryName + "2"
+        )
+
+        val bookCategory3 = saveBookCategory(
+            bookCategoryRepository,
+            "Home " + bookCategoryName + "기술"
+        )
+
+        // When
+        val bookCategoryList = bookCategoryRepository.findByNameContains(bookCategoryName, Pageable.unpaged())
+
+        // Then
+        assertThat(bookCategoryList)
+            .isNotNull
+            .isNotEmpty
+            .contains(bookCategory, bookCategory2, bookCategory3)
     }
 
     @RepeatedTest(10)
