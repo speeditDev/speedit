@@ -9,4 +9,4 @@ import org.springframework.test.context.TestPropertySource
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-annotation class DataJpaTestConfig()
+annotation class DataJpaTestConfig

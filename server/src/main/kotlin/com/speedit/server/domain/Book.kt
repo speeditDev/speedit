@@ -25,7 +25,7 @@ data class Book(
     var description: String = "",
 
     @ManyToOne
-    @JoinColumn(name = "categoryCode")
+    @JoinColumn(name = "categoryCode", foreignKey = ForeignKey(name = "FK_BOOK_TO_BOOK_CATEGORY"))
     var bookCategory: BookCategory? = null
 ) : BaseEntity() {
 

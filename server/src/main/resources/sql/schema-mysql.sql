@@ -23,7 +23,11 @@ CREATE DATABASE IF NOT EXISTS `book-plate`;
 
 USE `book-plate`;
 
+DROP TABLE IF EXISTS `Feed`;
+DROP TABLE IF EXISTS `Sentence`;
+DROP TABLE IF EXISTS `FavoriteBook`;
 DROP TABLE IF EXISTS `Book`;
+DROP TABLE IF EXISTS `SpeeditBookCategory`;
 DROP TABLE IF EXISTS `BookCategory`;
 
 --
@@ -67,10 +71,43 @@ CREATE TABLE `Book` (
                         `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                         `categoryCode` bigint DEFAULT NULL,
                         PRIMARY KEY (`isbn`),
-                        KEY `userAccount_user_userId_fk` (`categoryCode`),
-                        CONSTRAINT `FKaf93xcr9wchht6viajwunyh75` FOREIGN KEY (`categoryCode`) REFERENCES `BookCategory` (`code`)
+                        CONSTRAINT `FK_BOOK_TO_BOOK_CATEGORY` FOREIGN KEY (`categoryCode`) REFERENCES `BookCategory` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+create table FavoriteBook (
+                              id bigint not null auto_increment,
+                              createdAt datetime(6) not null,
+                              updatedAt datetime(6) not null,
+                              isbn bigint,
+                              userId bigint,
+                              PRIMARY KEY (id),
+                              CONSTRAINT `FK_FAVORITE_BOOK_TO_BOOK` FOREIGN KEY (`isbn`) REFERENCES `Book` (`isbn`),
+                              CONSTRAINT `FK_BOOK_TO_USER` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`)
+
+) engine=InnoDB;
+
+create table Feed (
+                      id bigint not null auto_increment,
+                      createdAt datetime(6) not null,
+                      updatedAt datetime(6) not null,
+                      userId bigint,
+                      PRIMARY KEY (id),
+                      CONSTRAINT `FK_FEED_TO_USER` FOREIGN KEY (`userId`) REFERENCES `User` (`userId`)
+) engine=InnoDB;
+
+create table Sentence (
+                          id bigint not null auto_increment,
+                          createdAt datetime(6) not null,
+                          updatedAt datetime(6) not null,
+                          sentence longtext,
+                          isbn bigint,
+                          feedId bigint,
+                          PRIMARY KEY (id),
+                          CONSTRAINT `FK_SENTENCE_TO_BOOK` FOREIGN KEY (`isbn`) REFERENCES `Book` (`isbn`),
+                          CONSTRAINT `FK_SENTENCE_TO_FEED` FOREIGN KEY (`feedId`) REFERENCES `Feed` (`id`)
+) engine=InnoDB;
 
 --
 -- Table structure for table `User`

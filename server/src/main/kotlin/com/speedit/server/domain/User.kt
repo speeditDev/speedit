@@ -56,6 +56,13 @@ data class User(
     @Column(nullable = true)
     var deletedAt: LocalDateTime? = null
 ) : BaseEntity() {
+
+    @OneToMany(mappedBy = "creator")
+    lateinit var feedList: List<Feed>
+
+    @OneToMany(mappedBy = "user")
+    lateinit var favoriteBookList: List<FavoriteBook>
+
     override fun toString(): String {
         return "User(userId=$userId, socialAccountId='$socialAccountId', socialAccountType=$socialAccountType, nickName='$nickName', thumbnail=$thumbnail, birth=$birth, sex=$sex, email='$email', companyName=$companyName, companyEmail=$companyEmail, isCompanyEmailValid=$isCompanyEmailValid, allowedUsedTerm=$allowedUsedTerm, allowedPrivacyTerm=$allowedPrivacyTerm, state=$state, deletedAt=$deletedAt)"
     }

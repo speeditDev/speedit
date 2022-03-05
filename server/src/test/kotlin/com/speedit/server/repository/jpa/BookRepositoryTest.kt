@@ -5,9 +5,12 @@ import com.speedit.server.domain.BookCategory
 import com.speedit.server.repository.jpa.annotation.DataJpaTestConfig
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
+import java.util.*
+import java.util.stream.LongStream
 
 @DataJpaTestConfig
 class BookRepositoryTest {
@@ -16,6 +19,34 @@ class BookRepositoryTest {
 
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
+
+    companion object {
+        fun generateNewBookIsbn(bookRepository: BookRepository): Long {
+            return LongStream.range(1, Long.MAX_VALUE)
+                .filter { id -> bookRepository.findById(id).isEmpty }
+                .findAny()
+                .orElseThrow()
+        }
+
+        fun getAnyBookCategory(bookRepository: BookRepository): Book {
+            return bookRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+
+        fun getOtherBook(bookRepository: BookRepository, book: Book): Book {
+            return bookRepository.findAll().stream()
+                .filter{ value -> !Objects.equals(book, value)}
+                .findAny()
+                .orElse(null)
+        }
+
+        fun getAnyBook(bookRepository: BookRepository): Book {
+            return bookRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+    }
 
 
     fun saveBookCategory(bookCategoryName: String): BookCategory {
@@ -32,6 +63,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 저장 테스트")
     fun test_save_book() {
         // Given
         val book = Book(
@@ -58,6 +90,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 수정 테스트")
     fun test_modify_book() {
         // Given
         val book = Book(
@@ -95,6 +128,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 조회 by id 테스트")
     fun test_find_book_by_id() {
         // Given
         val book = Book(
@@ -121,6 +155,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 삭제 테스트")
     fun test_delete_book() {
         // Given
         val book = Book(
@@ -149,6 +184,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 삭제 by id 테스트")
     fun test_delete_book_by_id() {
         // Given
         val book = Book(
@@ -177,6 +213,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 조회 by BookCategory 테스트")
     fun test_find_By_Book_Category() {
         // Given
         val bookCategory = BookCategoryRepositoryTest.getAnyBookCategory(bookCategoryRepository)
