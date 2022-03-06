@@ -1,6 +1,12 @@
 # env
 google-oauth2-client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
 jwt-secret-key: ${JWT_SECRET_KEY}
+
+# TODO: remove environment default value
+aladin-api-url: ${ALADIN_API_URL:http://www.aladin.co.kr/ttb/api}
+aladin-api-ttb-key: ${ALADIN_API_TTB_KEY:ttbrolroralra1814001}
+aladin-api-version: ${ALADIN_API_VERSION:20131101}
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -76,6 +82,6 @@ jwt:
 book:
   api:
     aladin:
-      base-url: http://www.aladin.co.kr/ttb/api
-      ttbKey: ttbrolroralra1814001              # TODO: jasypt config
-      apiVersion: 20131101
+      base-url: ${aladin-api-url}
+      ttbKey: ${aladin-api-ttb-key}              # TODO: jasypt config
+      apiVersion: ${aladin-api-version}

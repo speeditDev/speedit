@@ -19,10 +19,12 @@ class AladinBookServiceTest {
     lateinit var bookRepository: BookRepository
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
-    val aladinBookService: AladinBookService = AladinBookService()
+    @Autowired
+    lateinit var aladinConfig: AladinConfig
 
     val restTemplate = RestTemplate()
-    val aladinConfig = AladinConfig()
+
+    val aladinBookService: AladinBookService = AladinBookService()
 
     @PostConstruct
     fun postConstruct() {

@@ -15,11 +15,11 @@ import javax.annotation.PostConstruct
 class BookCategoryServiceImplTest {
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
-    val bookCategoryService: BookCategoryService = BookCategoryServiceImpl()
+    lateinit var bookCategoryService: BookCategoryService
 
     @PostConstruct
     fun postConstruct() {
-        (bookCategoryService as BookCategoryServiceImpl).bookCategoryRepository = bookCategoryRepository
+        bookCategoryService = BookCategoryServiceImpl(bookCategoryRepository)
     }
 
     @Test
