@@ -1,19 +1,18 @@
-package com.speedit.server.repository
+package com.speedit.server.repository.jpa
 
 import com.speedit.server.domain.Book
-import com.speedit.server.repository.jpa.BookCategoryRepository
-import com.speedit.server.repository.jpa.BookRepository
+import com.speedit.server.domain.BookCategory
+import com.speedit.server.repository.jpa.annotation.DataJpaTestConfig
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.Pageable
-import org.springframework.test.context.TestPropertySource
+import java.util.*
+import java.util.stream.LongStream
 
-@TestPropertySource("classpath:/application.yaml")
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTestConfig
 class BookRepositoryTest {
     @Autowired
     lateinit var bookRepository: BookRepository
@@ -21,7 +20,50 @@ class BookRepositoryTest {
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
 
+    companion object {
+        fun generateNewBookIsbn(bookRepository: BookRepository): Long {
+            return LongStream.range(1, Long.MAX_VALUE)
+                .filter { id -> bookRepository.findById(id).isEmpty }
+                .findAny()
+                .orElseThrow()
+        }
+
+        fun getAnyBookCategory(bookRepository: BookRepository): Book {
+            return bookRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+
+        fun getOtherBook(bookRepository: BookRepository, book: Book): Book {
+            return bookRepository.findAll().stream()
+                .filter{ value -> !Objects.equals(book, value)}
+                .findAny()
+                .orElse(null)
+        }
+
+        fun getAnyBook(bookRepository: BookRepository): Book {
+            return bookRepository.findAll().stream()
+                .findAny()
+                .orElse(null)
+        }
+    }
+
+
+    fun saveBookCategory(bookCategoryName: String): BookCategory {
+        return BookCategoryRepositoryTest.saveBookCategory(bookCategoryRepository, bookCategoryName)
+    }
+
+    @BeforeEach
+    fun beforeEach() {
+        saveBookCategory("book-category-0001")
+        saveBookCategory("book-category-0002")
+        saveBookCategory("book-category-0003")
+        saveBookCategory("book-category-0004")
+        saveBookCategory("book-category-0005")
+    }
+
     @Test
+    @DisplayName("Book 저장 테스트")
     fun test_save_book() {
         // Given
         val book = Book(
@@ -48,6 +90,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 수정 테스트")
     fun test_modify_book() {
         // Given
         val book = Book(
@@ -85,6 +128,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 조회 by id 테스트")
     fun test_find_book_by_id() {
         // Given
         val book = Book(
@@ -111,6 +155,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 삭제 테스트")
     fun test_delete_book() {
         // Given
         val book = Book(
@@ -139,6 +184,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 삭제 by id 테스트")
     fun test_delete_book_by_id() {
         // Given
         val book = Book(
@@ -167,6 +213,7 @@ class BookRepositoryTest {
     }
 
     @Test
+    @DisplayName("Book 조회 by BookCategory 테스트")
     fun test_find_By_Book_Category() {
         // Given
         val bookCategory = BookCategoryRepositoryTest.getAnyBookCategory(bookCategoryRepository)

@@ -50,6 +50,9 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0")
+
+    implementation("org.apache.commons:commons-text:1.9")
+    compileOnly("org.projectlombok:lombok:1.18.22")
 }
 
 tasks.withType<KotlinCompile> {

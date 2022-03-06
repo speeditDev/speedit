@@ -4,6 +4,10 @@ DATABASE_USER: root
 DATABASE_PASSWORD: adfaie83ma
 DATABASE_NAME: book-plate
 
+ALADIN_API_URL: http://www.aladin.co.kr/ttb/api
+ALADIN_API_TTB_KEY: ttbrolroralra1814001
+ALADIN_API_VERSION: 20131101
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +19,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

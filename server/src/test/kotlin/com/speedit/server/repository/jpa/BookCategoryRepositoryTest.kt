@@ -1,24 +1,19 @@
-package com.speedit.server.repository
+package com.speedit.server.repository.jpa
 
 import com.speedit.server.domain.BookCategory
-import com.speedit.server.repository.jpa.BookCategoryRepository
+import com.speedit.server.repository.jpa.annotation.DataJpaTestConfig
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.TestPropertySource
 import java.util.stream.LongStream
 
 import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.DisplayName
 import org.springframework.data.domain.Pageable
 import java.util.*
 
-
-@TestPropertySource("classpath:/application.yaml")
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTestConfig
 class BookCategoryRepositoryTest {
     @Autowired
     lateinit var bookCategoryRepository: BookCategoryRepository
@@ -27,7 +22,7 @@ class BookCategoryRepositoryTest {
         fun generateNewBookCategoryCode(bookCategoryRepository: BookCategoryRepository): Long {
             return LongStream.range(1, Long.MAX_VALUE)
                 .filter { id -> bookCategoryRepository.findById(id).isEmpty }
-                .findFirst()
+                .findAny()
                 .orElseThrow()
         }
 
@@ -54,6 +49,7 @@ class BookCategoryRepositoryTest {
     }
 
     @RepeatedTest(10)
+    @DisplayName("BookCategory 저장 테스트")
     fun test_save_book_category() {
         // Given
         val bookCategory = createBookCategory(
@@ -72,6 +68,7 @@ class BookCategoryRepositoryTest {
     }
 
     @RepeatedTest(10)
+    @DisplayName("BookCategory 수정 테스트")
     fun test_modify_book_category() {
         // Given
         val bookCategory = saveBookCategory(
@@ -99,6 +96,7 @@ class BookCategoryRepositoryTest {
     }
 
     @RepeatedTest(10)
+    @DisplayName("BookCategory 조회 by id 테스트")
     fun test_find_book_category_by_id() {
         // Given
         val bookCategory = saveBookCategory(
@@ -118,6 +116,7 @@ class BookCategoryRepositoryTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["it", "프로그래밍", "운영체제"])
+    @DisplayName("BookCategory 조회 by name 테스트")
     fun test_find_book_category_by_name(bookCategoryName: String) {
         // Given
         val bookCategory = saveBookCategory(
@@ -135,7 +134,38 @@ class BookCategoryRepositoryTest {
             .contains(bookCategory)
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["it", "프로그래밍", "운영체제"])
+    @DisplayName("BookCategory 조회 by name contains 테스트")
+    fun test_find_book_category_by_name_contains(bookCategoryName: String) {
+        // Given
+        val bookCategory = saveBookCategory(
+            bookCategoryRepository,
+            bookCategoryName
+        )
+
+        val bookCategory2 = saveBookCategory(
+            bookCategoryRepository,
+            bookCategoryName + "2"
+        )
+
+        val bookCategory3 = saveBookCategory(
+            bookCategoryRepository,
+            "Home " + bookCategoryName + "기술"
+        )
+
+        // When
+        val bookCategoryList = bookCategoryRepository.findByNameContains(bookCategoryName, Pageable.unpaged())
+
+        // Then
+        assertThat(bookCategoryList)
+            .isNotNull
+            .isNotEmpty
+            .contains(bookCategory, bookCategory2, bookCategory3)
+    }
+
     @RepeatedTest(10)
+    @DisplayName("BookCategory 삭제 테스트")
     fun test_delete_book_category() {
         // Given
         val bookCategory = saveBookCategory(
@@ -153,6 +183,7 @@ class BookCategoryRepositoryTest {
     }
 
     @RepeatedTest(10)
+    @DisplayName("BookCategory 삭제 by id 테스트")
     fun test_delete_book_category_by_id() {
         // Given
         val bookCategory = saveBookCategory(

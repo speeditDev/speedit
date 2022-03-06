@@ -1,21 +1,37 @@
 package com.speedit.server.domain
 
 import org.hibernate.Hibernate
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
-@Table
+@Table(indexes = [
+    Index(name = "depth0", columnList = "depth0"),
+    Index(name = "depth1", columnList = "depth1"),
+    Index(name = "depth2", columnList = "depth2"),
+    Index(name = "depth3", columnList = "depth3"),
+    Index(name = "depth4", columnList = "depth4"),
+    Index(name = "depth5", columnList = "depth5"),
+])
 data class BookCategory(
     @Id
     val code:Long,
     var name:String,
 
-    @OneToMany(mappedBy = "bookCategory")
-    val bookList:List<Book> = ArrayList()
+
 ): BaseEntity() {
+    lateinit var depth0:String
+    lateinit var depth1:String
+    lateinit var depth2:String
+    lateinit var depth3:String
+    lateinit var depth4:String
+    lateinit var depth5:String
+
+    @OneToMany(mappedBy = "bookCategory")
+    lateinit var bookList:List<Book>
+
+    @ManyToOne
+    @JoinColumn(name = "speeditBookCategory")
+    lateinit var speeditBookCategory: SpeeditBookCategory
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

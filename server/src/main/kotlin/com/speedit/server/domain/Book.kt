@@ -1,7 +1,9 @@
 package com.speedit.server.domain
 
+import com.speedit.server.dto.book.aladin.AladinBookDto
 import org.hibernate.Hibernate
 import org.hibernate.validator.constraints.ISBN
+import org.springframework.beans.BeanUtils
 import javax.persistence.*
 import javax.validation.constraints.PositiveOrZero
 
@@ -23,9 +25,18 @@ data class Book(
     var description: String = "",
 
     @ManyToOne
-    @JoinColumn(name = "categoryCode")
+    @JoinColumn(name = "categoryCode", foreignKey = ForeignKey(name = "FK_BOOK_TO_BOOK_CATEGORY"))
     var bookCategory: BookCategory? = null
 ) : BaseEntity() {
+
+    companion object {
+        fun of(aladinBookDto: AladinBookDto): Book {
+            val book = Book(aladinBookDto.isbn13.toLong(), aladinBookDto.title, aladinBookDto.priceStandard, aladinBookDto.link, aladinBookDto.cover, aladinBookDto.author, aladinBookDto.priceSales, aladinBookDto.publisher, aladinBookDto.description, BookCategory(aladinBookDto.categoryId, aladinBookDto.categoryName))
+            BeanUtils.copyProperties(aladinBookDto, book)
+
+            return book
+        }
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -40,6 +51,4 @@ data class Book(
     override fun toString(): String {
         return this::class.simpleName + "(isbn=$isbn, title='$title', price=$price, link=$link, image=$image, author=$author, discount=$discount, publisher=$publisher, description='$description', bookCategory=$bookCategory)"
     }
-
-
 }
