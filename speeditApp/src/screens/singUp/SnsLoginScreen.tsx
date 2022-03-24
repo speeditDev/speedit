@@ -1,5 +1,7 @@
 import * as React from 'react';
+import {useEffect} from "react";
 import {
+  Alert,
   Dimensions,
   Image,
   StyleSheet,
@@ -12,7 +14,7 @@ import {
 } from 'react-native';
 import {COLORS} from '../../styles/colors';
 import {pretendard} from '../../styles/textStyled';
-import {RootStackNavigationProps} from '../../navigation/RootStackNavigator';
+import {SignUpStackNavigationProps} from "../../navigation/SignUpStackNavigator";
 import {spacing} from '../../styles/spacing';
 
 import {
@@ -29,6 +31,9 @@ import {
   NativeModuleError,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+
+import {NaverLogin, getProfile} from "@react-native-seoul/naver-login";
+import {ioskeys, androidkeys} from './NaverKeys'
 
 const {width} = Dimensions.get('window');
 const LOGO_SIZE = width * 0.65;
@@ -57,15 +62,23 @@ const Container: React.FC = ({children}) => (
   </View>
 );
 
-const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>) => {
+const SnsLoginScreen = ({navigation}: SignUpStackNavigationProps<'SnsLoginScreen'>) => {
+  const [naverToken, setNaverToken] = React.useState(null);
+  useEffect(() => {
+    if (naverToken !== null) {
+      getUserProfile();
+    }
+  }, [naverToken]);
+
   const isIOS = Platform.OS === 'ios' ? true : false;
+  const initials = Platform.OS === 'ios' ? ioskeys : androidkeys;
 
   const onKakaoLogin = async () => {
     const kakaoToken = await login();
     const info = await getKakaoProfile();
     console.log(JSON.stringify(info));
     // info 안에 있는 정보들중 일부를 전역값으로 저장하고 있다가, 계정생성시 넘겨줘야함 ( 진석님 )
-    navigation.navigate('SignUpScreen');
+    navigation.navigate('SignNicknameScreen', {loginName: info.nickname});
   };
 
   const onGoogleLogin = async () => {
@@ -79,15 +92,42 @@ const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>
     }
     const info = await GoogleSignin.signIn();
     console.log(JSON.stringify(info));
-    navigation.navigate('SignUpScreen');
+    navigation.navigate('SignNicknameScreen', {loginName: info.user.name});
   };
+
+  const onNaverLogin = async () => {
+    await NaverLogin.login(initials, (err, token) => {
+      setNaverToken(token);
+    });
+  };
+
+  const getUserProfile = async () => {
+    const profileResult = await getProfile(naverToken.accessToken);
+    if (profileResult.resultcode === '024') {
+      Alert.alert('로그인 실패', profileResult.message);
+      return;
+    }
+    console.log('profileResult', profileResult);
+    console.log('token', naverToken);
+    console.log('profileResult', profileResult.response.nickname);
+    navigation.navigate('SignNicknameScreen', {loginName: profileResult.response.nickname});
+  };
+
+  // const getUserProfile = async () => {
+  //   const profileResult = await getProfile(naverToken.accessToken);
+  //   if (profileResult.resultcode === '024') {
+  //     Alert.alert('로그인 실패', profileResult.message);
+  //     return;
+  //   }
+  //   console.log('profileResult', profileResult);
+  // };
 
   return (
     <Container>
       <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <View
           style={{
-            flex: 1.5,
+            flex: 1.2,
             justifyContent: 'flex-end',
             alignSelf: 'flex-start',
             paddingBottom: 15,
@@ -107,7 +147,7 @@ const SnsLoginScreen = ({navigation}: RootStackNavigationProps<'SnsLoginScreen'>
             </TouchableOpacity>
           </View>
           <View style={{paddingRight: 10}}>
-            <TouchableOpacity onPress={() => {}} style={{width: 52, height: 52, borderRadius: 26}}>
+            <TouchableOpacity onPress={() => onNaverLogin()} style={{width: 52, height: 52, borderRadius: 26}}>
               <Image source={require('../../images/login_icon_naver.png')} width={52} height={52} />
             </TouchableOpacity>
           </View>
