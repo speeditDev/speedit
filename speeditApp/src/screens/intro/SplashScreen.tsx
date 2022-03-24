@@ -24,7 +24,7 @@ const SplashScreen = ({navigation}: RootStackNavigationProps<'SplashScreen'>) =>
 
   const goLogin = () => {
     // 로그인 화면으로
-    navigation.reset({index: 0, routes: [{name: 'SnsLoginScreen'}]});
+    navigation.reset({index: 0, routes: [{name: 'SignupStackScreen'}]});
   };
 
   const goHome = () => {

@@ -17,6 +17,8 @@ const IconSourceList: IconType[] = [
   {name: 'search', source: require('../images/icon_search_grey3.png'), width: 24, height: 24},
   {name: 'erase', source: require('../images/icon_close_grey2.png'), width: 16, height: 16},
   {name: 'share', source: require('../images/icon_share.png'), width: 24, height: 24},
+  {name: 'user', source: require('../../../../../RN/speedit/speeditApp/src/images/icon_user.png'), width: 13, height: 13},
+  {name: 'job', source: require('../../../../../RN/speedit/speeditApp/src/images/icon_job.png'), width: 13, height: 13},
 ];
 
 // 존재하는 이름만 입력가능하도록 설정하기 떄문에, undefined 를 강제로 허용안함

@@ -9,11 +9,11 @@ import {apolloClient} from './src/apollo/apolloClient';
 const App = () => {
   return (
     <ThemeProvider theme={myTheme}>
-      <ApolloProvider client={apolloClient}>
+      {/*<ApolloProvider client={apolloClient}>*/}
         <NavigationContainer>
           <RootStackNavigator />
         </NavigationContainer>
-      </ApolloProvider>
+      {/*</ApolloProvider>*/}
     </ThemeProvider>
   );
 };
